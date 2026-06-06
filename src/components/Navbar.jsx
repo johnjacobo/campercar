@@ -40,7 +40,6 @@ export default function Navbar({ activeTab, setActiveTab }) {
     { id: 'bookings', label: t('navbar.bookings') }
   ];
 
-  // Using FlagCDN (PNG images) instead of system emojis to guarantee flag icons render on Windows
   const langDetails = {
     es: { flagUrl: "https://flagcdn.com/w40/es.png", name: "Español" },
     en: { flagUrl: "https://flagcdn.com/w40/gb.png", name: "English" },
@@ -52,14 +51,6 @@ export default function Navbar({ activeTab, setActiveTab }) {
   return (
     <>
       <style>{`
-        .desktop-header-actions {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-        .mobile-lang-container {
-          display: none;
-        }
         .lang-item-btn:hover {
           background: rgba(255, 255, 255, 0.05) !important;
         }
@@ -68,16 +59,8 @@ export default function Navbar({ activeTab, setActiveTab }) {
           transform: translateY(-1px);
         }
         @media (max-width: 768px) {
-          .desktop-header-actions {
+          .desktop-only-btn {
             display: none !important;
-          }
-          .mobile-lang-container {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.25rem;
           }
         }
       `}</style>
@@ -119,105 +102,104 @@ export default function Navbar({ activeTab, setActiveTab }) {
           {/* Header Actions */}
           <div className="flex align-center" style={{ gap: '1rem' }}>
             
-            {/* Desktop Actions: CTA -> Profile -> Custom Language Dropdown */}
-            <div className="desktop-header-actions">
+            {/* Desktop-only: "Alquila tu Camper" CTA */}
+            <button 
+              className="btn btn-primary desktop-only-btn" 
+              style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', display: activeTab === 'partner' ? 'none' : 'block' }}
+              onClick={() => { setActiveTab('partner'); window.scrollTo(0, 0); }}
+            >
+              {t('navbar.cta_rent')}
+            </button>
+            
+            {/* Profile Avatar (Visible on both desktop & mobile) */}
+            <div className="detail-host-avatar" style={{ cursor: 'pointer', width: '36px', height: '36px' }} title="Mi Perfil">
+              <User size={18} />
+            </div>
+
+            {/* Custom Language Selector Dropdown (Visible on both desktop & mobile) */}
+            <div className="lang-selector-wrapper" style={{ position: 'relative' }}>
               <button 
-                className="btn btn-primary" 
-                style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', display: activeTab === 'partner' ? 'none' : 'block' }}
-                onClick={() => { setActiveTab('partner'); window.scrollTo(0, 0); }}
+                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} 
+                className="lang-trigger-btn glass"
+                style={{
+                  padding: '0.45rem 0.65rem',
+                  borderRadius: '10px',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid var(--border-color)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  outline: 'none',
+                  transition: 'all var(--transition-normal)',
+                  width: '42px',
+                  height: '36px'
+                }}
+                title="Seleccionar Idioma / Select Language"
               >
-                {t('navbar.cta_rent')}
+                <img 
+                  src={langDetails[language]?.flagUrl} 
+                  alt={langDetails[language]?.name} 
+                  style={{ width: '22px', height: '14px', objectFit: 'cover', borderRadius: '2px', display: 'block' }} 
+                />
               </button>
-              
-              <div className="detail-host-avatar" style={{ cursor: 'pointer', width: '36px', height: '36px' }} title="Mi Perfil">
-                <User size={18} />
-              </div>
 
-              {/* Custom Language Selector (shows selected flag when closed, full names when opened) */}
-              <div className="lang-selector-wrapper" style={{ position: 'relative' }}>
-                <button 
-                  onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} 
-                  className="lang-trigger-btn glass"
+              {isLangMenuOpen && (
+                <div 
+                  className="glass" 
                   style={{
-                    padding: '0.45rem 0.65rem',
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    marginTop: '0.5rem',
                     borderRadius: '10px',
-                    background: 'rgba(255, 255, 255, 0.08)',
+                    background: 'rgba(22, 24, 31, 0.95)',
                     border: '1px solid var(--border-color)',
-                    cursor: 'pointer',
+                    minWidth: '160px',
+                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
+                    zIndex: 1100,
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    outline: 'none',
-                    transition: 'all var(--transition-normal)',
-                    width: '42px',
-                    height: '36px'
+                    flexDirection: 'column',
+                    padding: '0.35rem',
+                    animation: 'scaleIn 0.15s ease-out'
                   }}
-                  title="Seleccionar Idioma / Select Language"
                 >
-                  <img 
-                    src={langDetails[language]?.flagUrl} 
-                    alt={langDetails[language]?.name} 
-                    style={{ width: '22px', height: '14px', objectFit: 'cover', borderRadius: '2px', display: 'block' }} 
-                  />
-                </button>
-
-                {isLangMenuOpen && (
-                  <div 
-                    className="glass" 
-                    style={{
-                      position: 'absolute',
-                      top: '100%',
-                      right: 0,
-                      marginTop: '0.5rem',
-                      borderRadius: '10px',
-                      background: 'rgba(22, 24, 31, 0.95)',
-                      border: '1px solid var(--border-color)',
-                      minWidth: '160px',
-                      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
-                      zIndex: 1100,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      padding: '0.35rem',
-                      animation: 'scaleIn 0.15s ease-out'
-                    }}
-                  >
-                    {Object.entries(langDetails).map(([code, details]) => (
-                      <button
-                        key={code}
-                        onClick={() => {
-                          setLanguage(code);
-                          setIsLangMenuOpen(false);
-                        }}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.75rem',
-                          padding: '0.6rem 0.8rem',
-                          borderRadius: '6px',
-                          color: language === code ? 'var(--accent-orange)' : 'var(--text-primary)',
-                          background: language === code ? 'rgba(255, 107, 53, 0.08)' : 'transparent',
-                          cursor: 'pointer',
-                          textAlign: 'left',
-                          fontWeight: language === code ? '700' : '500',
-                          fontSize: '0.85rem',
-                          transition: 'background 0.15s ease',
-                          width: '100%',
-                          outline: 'none',
-                          border: 'none'
-                        }}
-                        className="lang-item-btn"
-                      >
-                        <img 
-                          src={details.flagUrl} 
-                          alt={details.name} 
-                          style={{ width: '18px', height: '12px', objectFit: 'cover', borderRadius: '1.5px' }} 
-                        />
-                        <span>{details.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+                  {Object.entries(langDetails).map(([code, details]) => (
+                    <button
+                      key={code}
+                      onClick={() => {
+                        setLanguage(code);
+                        setIsLangMenuOpen(false);
+                      }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.75rem',
+                        padding: '0.6rem 0.8rem',
+                        borderRadius: '6px',
+                        color: language === code ? 'var(--accent-orange)' : 'var(--text-primary)',
+                        background: language === code ? 'rgba(255, 107, 53, 0.08)' : 'transparent',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        fontWeight: language === code ? '700' : '500',
+                        fontSize: '0.85rem',
+                        transition: 'background 0.15s ease',
+                        width: '100%',
+                        outline: 'none',
+                        border: 'none'
+                      }}
+                      className="lang-item-btn"
+                    >
+                      <img 
+                        src={details.flagUrl} 
+                        alt={details.name} 
+                        style={{ width: '18px', height: '12px', objectFit: 'cover', borderRadius: '1.5px' }} 
+                      />
+                      <span>{details.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
             
             {/* Mobile Menu Toggle Button */}
@@ -272,53 +254,6 @@ export default function Navbar({ activeTab, setActiveTab }) {
             >
               {t('navbar.cta_rent')}
             </button>
-
-            {/* Mobile Language Selector */}
-            <div className="mobile-lang-container">
-              <div className="flex align-center" style={{ gap: '0.75rem', marginBottom: '0.5rem' }}>
-                <div className="detail-host-avatar" style={{ width: '36px', height: '36px' }}>
-                  <User size={18} />
-                </div>
-                <span style={{ fontWeight: '600', fontSize: '0.95rem' }}>{t('navbar.bookings')} (Perfil)</span>
-              </div>
-              
-              <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--accent-gold)', marginBottom: '0.5rem', display: 'block' }}>
-                {language === 'es' ? 'Seleccionar Idioma' : language === 'en' ? 'Select Language' : language === 'de' ? 'Sprache auswählen' : language === 'fr' ? 'Choisir la langue' : 'Seleziona lingua'}
-              </label>
-              
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                {Object.entries(langDetails).map(([code, details]) => (
-                  <button
-                    key={code}
-                    onClick={() => {
-                      setLanguage(code);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      padding: '0.5rem 0.75rem',
-                      borderRadius: '8px',
-                      color: language === code ? 'var(--accent-orange)' : 'var(--text-primary)',
-                      background: language === code ? 'rgba(255, 107, 53, 0.1)' : 'rgba(255, 255, 255, 0.05)',
-                      border: language === code ? '1px solid var(--accent-orange)' : '1px solid var(--border-color)',
-                      cursor: 'pointer',
-                      fontWeight: '600',
-                      fontSize: '0.8rem',
-                      outline: 'none'
-                    }}
-                  >
-                    <img 
-                      src={details.flagUrl} 
-                      alt={details.name} 
-                      style={{ width: '18px', height: '12px', objectFit: 'cover', borderRadius: '1.5px' }} 
-                    />
-                    <span>{details.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
         )}
       </nav>
