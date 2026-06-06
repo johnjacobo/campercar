@@ -653,9 +653,14 @@ export default function App() {
       <footer className="footer">
         <div className="container footer-grid">
           <div className="footer-brand">
-            <a href="#home" className="logo-container" onClick={(e) => { e.preventDefault(); setActiveTab('home'); }}>
-              <Compass size={24} style={{ color: 'var(--accent-orange)' }} />
-              <span>Camper<span className="logo-text-highlight">Ventura</span></span>
+            <a href="#home" className="logo-container" onClick={(e) => { e.preventDefault(); setActiveTab('home'); }} style={{ gap: 0, alignSelf: 'flex-start' }}>
+              <div style={{ background: 'white', padding: '4px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', height: '44px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
+                <img 
+                  src={getImageUrl('images/logo.png')} 
+                  alt="CamperVentura Logo" 
+                  style={{ height: '100%', objectFit: 'contain' }} 
+                />
+              </div>
             </a>
             <p style={{ marginTop: '0.5rem' }}>No es un paseo más, es tu próxima aventura. Alquila vehículos autónomos de caravaning en Fuerteventura, Canarias.</p>
           </div>
