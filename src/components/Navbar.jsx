@@ -29,14 +29,17 @@ export default function Navbar({ activeTab, setActiveTab }) {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''} glass`}>
       <div className="container flex align-center justify-between">
         {/* Logo */}
-        <a href="#home" className="logo-container" onClick={(e) => { e.preventDefault(); setActiveTab('home'); }} style={{ gap: 0 }}>
-          <div style={{ background: 'white', padding: '4px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', height: '48px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}>
-            <img 
-              src={import.meta.env.BASE_URL + 'images/logo.png'} 
-              alt="CamperVentura Logo" 
-              style={{ height: '100%', objectFit: 'contain' }} 
-            />
-          </div>
+        <a href="#home" className="logo-container" onClick={(e) => { e.preventDefault(); setActiveTab('home'); }} style={{ padding: 0 }}>
+          <img 
+            src={import.meta.env.BASE_URL + 'images/logo.png'} 
+            alt="CamperVentura Logo" 
+            style={{ 
+              height: '65px', 
+              objectFit: 'contain',
+              filter: 'invert(1)',
+              mixBlendMode: 'screen'
+            }} 
+          />
         </a>
 
         {/* Desktop Links */}
