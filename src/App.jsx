@@ -15,11 +15,15 @@ import AdventureMap from './components/AdventureMap';
 // Import seed data
 import { initialCampers } from './data/campers';
 
+// Import Language Context
+import { useLanguage } from './context/LanguageContext';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [selectedCamper, setSelectedCamper] = useState(null);
   const [campers, setCampers] = useState([]);
   const [bookings, setBookings] = useState([]);
+  const { language, t } = useLanguage();
   
   // Search state
   const [searchLocation, setSearchLocation] = useState('');
@@ -76,7 +80,7 @@ export default function App() {
   };
 
   const handleCancelBooking = (bookingId) => {
-    if (window.confirm('¿Seguro que deseas cancelar esta aventura en fuerteventura?')) {
+    if (window.confirm(t('bookings.cancel_confirm'))) {
       const storedBookings = JSON.parse(localStorage.getItem('camper_bookings') || '[]');
       const updated = storedBookings.filter(b => b.id !== bookingId);
       localStorage.setItem('camper_bookings', JSON.stringify(updated));
@@ -84,10 +88,38 @@ export default function App() {
     }
   };
 
+  const getLocalized = (field) => {
+    if (!field) return '';
+    if (typeof field === 'string') return field;
+    return field[language] || field['es'] || '';
+  };
+
+  const getTypeLabel = (type) => {
+    const map = {
+      'camper': 'fleet.type_camper',
+      'Furgoneta Camper': 'fleet.type_camper',
+      'motorhome': 'fleet.type_motorhome',
+      'Autocaravana': 'fleet.type_motorhome',
+      '4x4': 'fleet.type_4x4',
+      '4x4 con Tienda': 'fleet.type_4x4'
+    };
+    const key = map[type];
+    return key ? t(key) : type;
+  };
+
   // Filter campers based on search inputs
   const filteredCampers = campers.filter(camper => {
     // Filter by type
-    if (searchType && camper.type !== searchType) return false;
+    if (searchType) {
+      const typeMap = {
+        'Furgoneta Camper': 'camper',
+        'Autocaravana': 'motorhome',
+        '4x4 con Tienda': '4x4'
+      };
+      const camperTypeNormalized = typeMap[camper.type] || camper.type;
+      const searchTypeNormalized = typeMap[searchType] || searchType;
+      if (camperTypeNormalized !== searchTypeNormalized) return false;
+    }
     
     // Filter by guests capacity
     if (searchGuests && camper.passengers < Number(searchGuests)) return false;
@@ -151,7 +183,6 @@ export default function App() {
           {/* Hero Section with Drone Video Background */}
           <section className="hero-section">
             <div className="hero-video-container">
-              {/* Drone video showing waves breaking on golden beach sands (simulating Fuerteventura) */}
               <video 
                 className="hero-video" 
                 src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-waves-crashing-on-a-beach-of-golden-sand-34320-large.mp4" 
@@ -163,19 +194,19 @@ export default function App() {
             </div>
             <div className="hero-overlay" />
             <div className="hero-content">
-              <span className="hero-tagline animate-fade-in">Fuerteventura, Islas Canarias</span>
+              <span className="hero-tagline animate-fade-in">{t('hero.tagline')}</span>
               <h1 className="hero-title animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                No es un paseo más, es tu próxima aventura
+                {t('hero.title')}
               </h1>
               <p className="hero-desc animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                Alquila campers y autocaravanas locales para recorrer los volcanes, acantilados y playas salvajes de la isla del viento. Vive con total libertad.
+                {t('hero.desc')}
               </p>
               <div className="hero-buttons animate-fade-in" style={{ animationDelay: '0.6s' }}>
                 <button className="btn btn-primary" onClick={() => setActiveTab('fleet')}>
-                  Explorar Campers <ArrowUpRight size={18} />
+                  {t('hero.btn_fleet')} <ArrowUpRight size={18} />
                 </button>
                 <button className="btn btn-secondary" onClick={() => setActiveTab('guide')}>
-                  Ver Guía de Spots
+                  {t('hero.btn_guide')}
                 </button>
               </div>
             </div>
@@ -186,11 +217,11 @@ export default function App() {
             <form onSubmit={handleSearchSubmit} className="search-bar glass">
               <div className="search-group">
                 <label>
-                  <MapPin size={14} /> Dónde recoger
+                  <MapPin size={14} /> {t('search.where')}
                 </label>
                 <input 
                   type="text" 
-                  placeholder="Ej. Corralejo, Aeropuerto..." 
+                  placeholder={t('search.where_placeholder')} 
                   value={searchLocation}
                   onChange={(e) => setSearchLocation(e.target.value)}
                 />
@@ -198,7 +229,7 @@ export default function App() {
 
               <div className="search-group">
                 <label>
-                  <CalendarDays size={14} /> Inicio viaje
+                  <CalendarDays size={14} /> {t('search.start')}
                 </label>
                 <input 
                   type="date" 
@@ -209,7 +240,7 @@ export default function App() {
 
               <div className="search-group">
                 <label>
-                  <CalendarDays size={14} /> Fin viaje
+                  <CalendarDays size={14} /> {t('search.end')}
                 </label>
                 <input 
                   type="date" 
@@ -220,21 +251,21 @@ export default function App() {
 
               <div className="search-group">
                 <label>
-                  <Users size={14} /> Pasajeros
+                  <Users size={14} /> {t('search.guests')}
                 </label>
                 <select 
                   value={searchGuests}
                   onChange={(e) => setSearchGuests(e.target.value)}
                 >
-                  <option value="">Cualquiera</option>
-                  <option value="2">2 personas</option>
-                  <option value="3">3 personas</option>
-                  <option value="4">4+ personas</option>
+                  <option value="">{t('search.any')}</option>
+                  <option value="2">{t('search.guests_2')}</option>
+                  <option value="3">{t('search.guests_3')}</option>
+                  <option value="4">{t('search.guests_4')}</option>
                 </select>
               </div>
 
               <button type="submit" className="btn btn-primary">
-                <Search size={18} /> Buscar
+                <Search size={18} /> {t('search.btn_search')}
               </button>
             </form>
           </div>
@@ -242,9 +273,9 @@ export default function App() {
           {/* Featured Adventure Fleet */}
           <section className="section container">
             <div className="section-header">
-              <span className="section-subtitle">Flota de Aventura</span>
-              <h2>Nuestras recomendadas para recorrer la isla</h2>
-              <p>Vehículos seleccionados y equipados por locales que conocen cada rincón de Fuerteventura.</p>
+              <span className="section-subtitle">{t('fleet.recommended_subtitle')}</span>
+              <h2>{t('fleet.recommended_title')}</h2>
+              <p>{t('fleet.recommended_desc')}</p>
             </div>
 
             <div className="grid grid-cols-3">
@@ -259,7 +290,7 @@ export default function App() {
 
             <div style={{ textAlign: 'center', marginTop: '3.5rem' }}>
               <button className="btn btn-secondary" onClick={() => setActiveTab('fleet')}>
-                Ver todo el catálogo ({campers.length} campers)
+                {t('fleet.btn_all_fleet')} ({campers.length} campers)
               </button>
             </div>
           </section>
@@ -268,9 +299,9 @@ export default function App() {
           <section className="section" style={{ background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)', borderBottom: '1px solid var(--border-color)' }}>
             <div className="container">
               <div className="section-header">
-                <span className="section-subtitle">Vive Fuerteventura</span>
-                <h2>¿Por qué alquilar con nosotros?</h2>
-                <p>Nuestra plataforma conecta viajeros con socios locales amantes del Caravaning.</p>
+                <span className="section-subtitle">{t('why_us.subtitle')}</span>
+                <h2>{t('why_us.title')}</h2>
+                <p>{t('why_us.desc')}</p>
               </div>
 
               <div className="grid grid-cols-3" style={{ gap: '3rem' }}>
@@ -278,24 +309,24 @@ export default function App() {
                   <div className="success-icon" style={{ background: 'rgba(255, 107, 53, 0.1)', color: 'var(--accent-orange)', border: '1px solid rgba(255, 107, 53, 0.2)' }}>
                     <ShieldCheck size={28} />
                   </div>
-                  <h4 style={{ margin: '1rem 0 0.5rem' }}>Socios Locales Verificados</h4>
-                  <p style={{ fontSize: '0.95rem' }}>Todos los campers y anfitriones pasan una inspección técnica e higiénica previa para garantizar tu seguridad en ruta.</p>
+                  <h4 style={{ margin: '1rem 0 0.5rem' }}>{t('why_us.card1_title')}</h4>
+                  <p style={{ fontSize: '0.95rem' }}>{t('why_us.card1_desc')}</p>
                 </div>
 
                 <div style={{ textAlign: 'center', padding: '1rem' }}>
                   <div className="success-icon" style={{ background: 'rgba(230, 194, 128, 0.1)', color: 'var(--accent-gold)', border: '1px solid rgba(230, 194, 128, 0.2)' }}>
                     <Sparkles size={28} />
                   </div>
-                  <h4 style={{ margin: '1rem 0 0.5rem' }}>Equipamiento Off-Grid</h4>
-                  <p style={{ fontSize: '0.95rem' }}>Placas solares, duchas, cocina y todo lo necesario para vivir libremente sin necesidad de camping tradicional.</p>
+                  <h4 style={{ margin: '1rem 0 0.5rem' }}>{t('why_us.card2_title')}</h4>
+                  <p style={{ fontSize: '0.95rem' }}>{t('why_us.card2_desc')}</p>
                 </div>
 
                 <div style={{ textAlign: 'center', padding: '1rem' }}>
                   <div className="success-icon" style={{ background: 'rgba(2, 128, 144, 0.1)', color: 'var(--accent-teal)', border: '1px solid rgba(2, 128, 144, 0.2)' }}>
                     <HeartHandshake size={28} />
                   </div>
-                  <h4 style={{ margin: '1rem 0 0.5rem' }}>Guía y Rutas de Aventura</h4>
-                  <p style={{ fontSize: '0.95rem' }}>Accede a recomendaciones locales personalizadas de zonas autorizadas para pernoctar y spots para practicar surf.</p>
+                  <h4 style={{ margin: '1rem 0 0.5rem' }}>{t('why_us.card3_title')}</h4>
+                  <p style={{ fontSize: '0.95rem' }}>{t('why_us.card3_desc')}</p>
                 </div>
               </div>
             </div>
@@ -308,19 +339,19 @@ export default function App() {
         <div className="animate-fade-in" style={{ paddingTop: '120px' }}>
           <section className="container" style={{ marginBottom: '5rem' }}>
             <div className="section-header" style={{ marginBottom: '3rem' }}>
-              <span className="section-subtitle">Nuestra Flota</span>
-              <h2>Encuentra tu Camper Ideal</h2>
-              <p>Filtra por zona de recogida, tipo de vehículo o equipamiento para encontrar tu compañera de aventura.</p>
+              <span className="section-subtitle">{t('fleet.subtitle')}</span>
+              <h2>{t('fleet.title')}</h2>
+              <p>{t('fleet.desc')}</p>
             </div>
 
             {/* Filter controls */}
             <div className="glass" style={{ padding: '1.5rem', borderRadius: 'var(--radius-md)', marginBottom: '3rem', border: '1px solid var(--border-color)' }}>
               <div className="grid grid-cols-4" style={{ gap: '1.5rem' }}>
                 <div className="form-group">
-                  <label style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--accent-gold)' }}>Zona de Recogida</label>
+                  <label style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--accent-gold)' }}>{t('fleet.filter_location')}</label>
                   <input 
                     type="text" 
-                    placeholder="Ej. Corralejo, Cotillo..." 
+                    placeholder={t('search.where_placeholder')} 
                     value={searchLocation}
                     onChange={(e) => setSearchLocation(e.target.value)}
                     style={{ background: 'var(--bg-primary)', padding: '0.65rem' }}
@@ -328,30 +359,30 @@ export default function App() {
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--accent-gold)' }}>Tipo de Vehículo</label>
+                  <label style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--accent-gold)' }}>{t('fleet.filter_type')}</label>
                   <select 
                     value={searchType} 
                     onChange={(e) => setSearchType(e.target.value)}
                     style={{ background: 'var(--bg-primary)', padding: '0.65rem' }}
                   >
-                    <option value="">Todos los tipos</option>
-                    <option value="Furgoneta Camper">Furgoneta Camper</option>
-                    <option value="Autocaravana">Autocaravana</option>
-                    <option value="4x4 con Tienda">4x4 con Tienda de Techo</option>
+                    <option value="">{t('fleet.all_types')}</option>
+                    <option value="camper">{t('fleet.type_camper')}</option>
+                    <option value="motorhome">{t('fleet.type_motorhome')}</option>
+                    <option value="4x4">{t('fleet.type_4x4')}</option>
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--accent-gold)' }}>Capacidad Pasajeros</label>
+                  <label style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--accent-gold)' }}>{t('fleet.filter_guests')}</label>
                   <select 
                     value={searchGuests} 
                     onChange={(e) => setSearchGuests(e.target.value)}
                     style={{ background: 'var(--bg-primary)', padding: '0.65rem' }}
                   >
-                    <option value="">Cualquier capacidad</option>
-                    <option value="2">Mínimo 2 personas</option>
-                    <option value="3">Mínimo 3 personas</option>
-                    <option value="4">Mínimo 4 personas</option>
+                    <option value="">{t('fleet.cap_any')}</option>
+                    <option value="2">{t('fleet.cap_2')}</option>
+                    <option value="3">{t('fleet.cap_3')}</option>
+                    <option value="4">{t('fleet.cap_4')}</option>
                   </select>
                 </div>
 
@@ -365,7 +396,7 @@ export default function App() {
                       setSearchGuests('');
                     }}
                   >
-                    Limpiar Filtros
+                    {t('fleet.btn_clear')}
                   </button>
                 </div>
               </div>
@@ -385,8 +416,8 @@ export default function App() {
             ) : (
               <div style={{ textAlign: 'center', padding: '4rem 1rem' }} className="glass">
                 <Info size={40} style={{ color: 'var(--accent-gold)', marginBottom: '1.5rem' }} />
-                <h3>No se encontraron campers</h3>
-                <p style={{ marginTop: '0.5rem' }}>Prueba a modificar los filtros o a buscar otra zona de recogida en Fuerteventura.</p>
+                <h3>{t('fleet.no_campers_title')}</h3>
+                <p style={{ marginTop: '0.5rem' }}>{t('fleet.no_campers_desc')}</p>
               </div>
             )}
           </section>
@@ -399,9 +430,9 @@ export default function App() {
           <section className="guide-section section">
             <div className="container">
               <div className="section-header">
-                <span className="section-subtitle">Mapa de Aventura</span>
-                <h2>Explora Fuerteventura</h2>
-                <p>Haz clic en los puntos interactivos del mapa para descubrir recomendaciones exclusivas para tu viaje en camper.</p>
+                <span className="section-subtitle">{t('map.subtitle')}</span>
+                <h2>{t('map.title')}</h2>
+                <p>{t('map.desc')}</p>
               </div>
 
               {/* Vector SVG map component */}
@@ -416,9 +447,9 @@ export default function App() {
         <div className="animate-fade-in" style={{ paddingTop: '120px' }}>
           <section className="partner-hero">
             <div className="container" style={{ textAlign: 'center', maxWidth: '600px' }}>
-              <span className="section-subtitle">Únete como Socio</span>
-              <h2>Gana dinero compartiendo tu aventura</h2>
-              <p style={{ marginTop: '0.5rem' }}>Registra tu autocaravana o campervan local, conéctate con viajeros responsables y conviértete en parte de nuestra comunidad.</p>
+              <span className="section-subtitle">{t('partner.subtitle')}</span>
+              <h2>{t('partner.title')}</h2>
+              <p style={{ marginTop: '0.5rem' }}>{t('partner.desc')}</p>
             </div>
           </section>
 
@@ -434,9 +465,9 @@ export default function App() {
         <div className="animate-fade-in" style={{ paddingTop: '120px' }}>
           <section className="container" style={{ marginBottom: '6rem' }}>
             <div className="section-header">
-              <span className="section-subtitle">Mis Viajes</span>
-              <h2>Tus Aventuras Programadas</h2>
-              <p>Aquí puedes consultar tus reservas activas, códigos de confirmación y el estado de tus alquileres.</p>
+              <span className="section-subtitle">{t('bookings.subtitle')}</span>
+              <h2>{t('bookings.title')}</h2>
+              <p>{t('bookings.desc')}</p>
             </div>
 
             {bookings.length > 0 ? (
@@ -450,21 +481,21 @@ export default function App() {
                     />
                     <div>
                       <div className="flex align-center gap-2" style={{ gap: '0.5rem', marginBottom: '0.35rem' }}>
-                        <span className="badge badge-adventure" style={{ fontSize: '0.65rem' }}>{booking.camperType}</span>
+                        <span className="badge badge-adventure" style={{ fontSize: '0.65rem' }}>{getTypeLabel(booking.camperType)}</span>
                         <span className="badge badge-gold" style={{ fontSize: '0.65rem' }}>{booking.bookingCode}</span>
                       </div>
                       <h4 style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>{booking.camperTitle}</h4>
                       <p style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--text-secondary)' }}>
                         <Calendar size={14} />
-                        <span>Fechas: {booking.startDate} al {booking.endDate}</span>
+                        <span>{t('bookings.dates')}: {booking.startDate} {language === 'es' ? 'al' : language === 'en' ? 'to' : language === 'de' ? 'bis' : language === 'fr' ? 'au' : 'al'} {booking.endDate}</span>
                       </p>
                       <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                        Duración: {booking.nights} noches | Reservado el: {booking.bookedAt}
+                        {t('bookings.duration')}: {booking.nights} {t('bookings.nights')} | {language === 'es' ? 'Reservado' : language === 'en' ? 'Booked' : language === 'de' ? 'Gebucht' : language === 'fr' ? 'Réservé' : 'Prenotato'} el: {booking.bookedAt}
                       </p>
                     </div>
                     <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                       <div>
-                        <span style={{ fontSize: '0.8rem', display: 'block', color: 'var(--text-secondary)' }}>Precio Total</span>
+                        <span style={{ fontSize: '0.8rem', display: 'block', color: 'var(--text-secondary)' }}>{t('bookings.price_total')}</span>
                         <span style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--accent-orange)' }}>{booking.totalPrice}€</span>
                       </div>
                       <button 
@@ -472,7 +503,7 @@ export default function App() {
                         style={{ padding: '0.4rem 0.8rem', fontSize: '0.75rem', border: '1px solid rgba(255,0,0,0.2)', color: '#ff4d4d', background: 'rgba(255,0,0,0.05)' }}
                         onClick={() => handleCancelBooking(booking.id)}
                       >
-                        Cancelar
+                        {t('bookings.btn_cancel')}
                       </button>
                     </div>
                   </div>
@@ -481,10 +512,10 @@ export default function App() {
             ) : (
               <div style={{ textAlign: 'center', padding: '5rem 1rem', maxWidth: '600px', margin: '0 auto' }} className="glass">
                 <Compass size={44} style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }} className="animate-spin-slow" />
-                <h3>Aún no tienes viajes reservados</h3>
-                <p style={{ marginTop: '0.5rem', marginBottom: '2rem' }}>Explora nuestra flota de campers en Fuerteventura y reserva tu próximo gran viaje de aventura hoy mismo.</p>
+                <h3>{t('bookings.no_bookings_title')}</h3>
+                <p style={{ marginTop: '0.5rem', marginBottom: '2rem' }}>{t('bookings.no_bookings_desc')}</p>
                 <button className="btn btn-primary" onClick={() => setActiveTab('fleet')}>
-                  Explorar Campers
+                  {t('bookings.btn_explore')}
                 </button>
               </div>
             )}
@@ -502,7 +533,7 @@ export default function App() {
               style={{ marginBottom: '2rem' }}
               onClick={() => setSelectedCamper(null)}
             >
-              ← Volver al catálogo
+              {t('details.back')}
             </button>
 
             <div className="glass" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
@@ -525,7 +556,7 @@ export default function App() {
               <div className="detail-body">
                 {/* Left side: Information */}
                 <div className="detail-info-section">
-                  <span className="badge badge-adventure" style={{ marginBottom: '0.5rem' }}>{selectedCamper.type}</span>
+                  <span className="badge badge-adventure" style={{ marginBottom: '0.5rem' }}>{getTypeLabel(selectedCamper.type)}</span>
                   <h2>{selectedCamper.title}</h2>
                   
                   {/* Host and Rating info */}
@@ -534,27 +565,27 @@ export default function App() {
                       {selectedCamper.host.avatar}
                     </div>
                     <div>
-                      <span style={{ fontWeight: '600', color: 'white', display: 'block' }}>Por {selectedCamper.host.name}</span>
-                      <span>{selectedCamper.host.status}</span>
+                      <span style={{ fontWeight: '600', color: 'white', display: 'block' }}>{t('details.host_by')} {selectedCamper.host.name}</span>
+                      <span>{getLocalized(selectedCamper.host.status)}</span>
                     </div>
                     <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--accent-gold)' }}>
                       <Star size={16} fill="var(--accent-gold)" />
                       <strong style={{ fontSize: '1.1rem' }}>{selectedCamper.rating}</strong>
-                      <span style={{ color: 'var(--text-muted)' }}>({selectedCamper.reviewsCount} evaluaciones)</span>
+                      <span style={{ color: 'var(--text-muted)' }}>({selectedCamper.reviewsCount} {t('details.reviews')})</span>
                     </div>
                   </div>
 
                   <p className="detail-description">
-                    {selectedCamper.description}
+                    {getLocalized(selectedCamper.description)}
                   </p>
 
                   <div className="detail-amenities">
-                    <h3>Equipamiento Incluido</h3>
+                    <h3>{t('details.amenities_title')}</h3>
                     <div className="amenities-list">
                       {selectedCamper.amenities.map((amenity, idx) => (
                         <div key={idx} className="amenity-item">
                           <CheckCircle size={18} />
-                          <span>{amenity}</span>
+                          <span>{getLocalized(amenity)}</span>
                         </div>
                       ))}
                     </div>
@@ -565,12 +596,12 @@ export default function App() {
                 <div>
                   <div className="booking-card glass" style={{ background: 'var(--bg-secondary)' }}>
                     <div className="booking-price">
-                      {selectedCamper.price}€ <span>/ noche</span>
+                      {selectedCamper.price}€ <span>/ {t('details.nights_count')}</span>
                     </div>
 
                     <form className="booking-form" onSubmit={(e) => { e.preventDefault(); if(nights > 0) setShowBookingModal(true); }}>
                       <div className="booking-field">
-                        <label>Lugar de entrega en la isla</label>
+                        <label>{t('details.delivery_location')}</label>
                         <select>
                           {selectedCamper.locations.map(loc => (
                             <option key={loc} value={loc}>{loc} (Fuerteventura)</option>
@@ -579,7 +610,7 @@ export default function App() {
                       </div>
 
                       <div className="booking-field">
-                        <label>Fecha de Recogida</label>
+                        <label>{t('details.pickup_date')}</label>
                         <input 
                           type="date" 
                           value={checkInDate} 
@@ -589,7 +620,7 @@ export default function App() {
                       </div>
 
                       <div className="booking-field">
-                        <label>Fecha de Devolución</label>
+                        <label>{t('details.return_date')}</label>
                         <input 
                           type="date" 
                           value={checkOutDate} 
@@ -602,30 +633,30 @@ export default function App() {
                         <>
                           <div className="booking-breakdown animate-scale-in">
                             <div className="breakdown-row">
-                              <span>{selectedCamper.price}€ x {nights} noches</span>
+                              <span>{selectedCamper.price}€ x {nights} {t('details.nights_count')}</span>
                               <span>{breakdown.base}€</span>
                             </div>
                             <div className="breakdown-row">
-                              <span>Preparación higiénica</span>
+                              <span>{t('details.cleaning_fee')}</span>
                               <span>{breakdown.cleaning}€</span>
                             </div>
                             <div className="breakdown-row">
-                              <span>Tasa de servicio (8%)</span>
+                              <span>{t('details.service_fee')}</span>
                               <span>{breakdown.service}€</span>
                             </div>
                             <div className="breakdown-row total">
-                              <span>Total</span>
+                              <span>{t('details.total')}</span>
                               <span>{breakdown.total}€</span>
                             </div>
                           </div>
 
                           <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-                            Reservar Aventura
+                            {t('details.btn_book')}
                           </button>
                         </>
                       ) : (
                         <button type="button" className="btn btn-secondary" style={{ width: '100%', cursor: 'not-allowed' }} disabled>
-                          Selecciona fechas válidas
+                          {t('details.btn_invalid_dates')}
                         </button>
                       )}
                     </form>
@@ -663,31 +694,31 @@ export default function App() {
                 }} 
               />
             </a>
-            <p style={{ marginTop: '0.5rem' }}>No es un paseo más, es tu próxima aventura. Alquila vehículos autónomos de caravaning en Fuerteventura, Canarias.</p>
+            <p style={{ marginTop: '0.5rem' }}>{t('footer.desc')}</p>
           </div>
 
           <div className="footer-links">
-            <h4>Plataforma</h4>
+            <h4>{t('footer.col_platform')}</h4>
             <ul>
-              <li><a href="#fleet" onClick={(e) => { e.preventDefault(); setActiveTab('fleet'); }}>Explorar Campers</a></li>
-              <li><a href="#partner" onClick={(e) => { e.preventDefault(); setActiveTab('partner'); }}>Hazte Socio Local</a></li>
-              <li><a href="#guide" onClick={(e) => { e.preventDefault(); setActiveTab('guide'); }}>Mapa de Fuerteventura</a></li>
+              <li><a href="#fleet" onClick={(e) => { e.preventDefault(); setActiveTab('fleet'); }}>{t('navbar.fleet')}</a></li>
+              <li><a href="#partner" onClick={(e) => { e.preventDefault(); setActiveTab('partner'); }}>{t('navbar.partner')}</a></li>
+              <li><a href="#guide" onClick={(e) => { e.preventDefault(); setActiveTab('guide'); }}>{t('navbar.guide')}</a></li>
             </ul>
           </div>
 
           <div className="footer-links">
-            <h4>Normativas</h4>
+            <h4>{t('footer.col_rules')}</h4>
             <ul>
-              <li><a href="#" onClick={(e) => e.preventDefault()}>Pernocta en Canarias</a></li>
-              <li><a href="#" onClick={(e) => e.preventDefault()}>Zonas de vertido</a></li>
-              <li><a href="#" onClick={(e) => e.preventDefault()}>Términos de servicio</a></li>
+              <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.rule_overnight')}</a></li>
+              <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.rule_waste')}</a></li>
+              <li><a href="#" onClick={(e) => e.preventDefault()}>{t('footer.rule_terms')}</a></li>
             </ul>
           </div>
 
           <div className="footer-links">
-            <h4>Contacto</h4>
+            <h4>{t('footer.col_contact')}</h4>
             <ul style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-              <li>Fuerteventura, Islas Canarias</li>
+              <li>{t('footer.address')}</li>
               <li>soporte@camperventura.com</li>
               <li>+34 928 00 00 00</li>
             </ul>
@@ -695,7 +726,7 @@ export default function App() {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} CamperVentura. Todos los derechos reservados. Hecho con pasión por la aventura.</p>
+          <p>© {new Date().getFullYear()} CamperVentura. {t('footer.copyright')}</p>
         </div>
       </footer>
     </>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, CheckCircle2, ShieldAlert, Sparkles, X, HeartHandshake } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function BookingModal({ camper, dates, totalNights, costBreakdown, onClose, onBookingSuccess }) {
   const [name, setName] = useState('');
@@ -9,11 +10,41 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [bookingCode, setBookingCode] = useState('');
+  const { language, t } = useLanguage();
+
+  const termsLabel = {
+    es: "Acepto la normativa de pernocta de las Islas Canarias (no acampar en playas protegidas, usar depósitos de aguas grises y dejar los espacios limpios).",
+    en: "I accept the overnight camping regulations of the Canary Islands (no camping on protected beaches, use greywater tanks, and keep spaces clean).",
+    de: "Ich akzeptiere die Übernachtungsvorschriften der Kanarischen Inseln (kein Camping an geschützten Stränden, Nutzung von Grauwassertanks und sauberes Hinterlassen der Plätze).",
+    fr: "J'accepte la réglementation sur le bivouac des îles Canaries (pas de camping sur les plages protégées, utilisation de réservoirs d'eaux grises et respect de la propreté).",
+    it: "Accetto le norme sul pernottamento delle Isole Canarie (divieto di campeggio sulle spiagge protette, utilizzo di serbatoi per le acque grigie e mantenimento della pulizia)."
+  };
+
+  const validationAlert = {
+    es: "Por favor, rellene todos los campos y acepte la normativa.",
+    en: "Please fill in all fields and accept the regulations.",
+    de: "Bitte füllen Sie alle Felder aus und akzeptieren Sie die Vorschriften.",
+    fr: "Veuillez remplir tous les champs et accepter la réglementation.",
+    it: "Si prega di compilare tutti i campi e accettare il regolamento."
+  };
+
+  const getTypeLabel = (type) => {
+    const map = {
+      'camper': 'fleet.type_camper',
+      'Furgoneta Camper': 'fleet.type_camper',
+      'motorhome': 'fleet.type_motorhome',
+      'Autocaravana': 'fleet.type_motorhome',
+      '4x4': 'fleet.type_4x4',
+      '4x4 con Tienda': 'fleet.type_4x4'
+    };
+    const key = map[type];
+    return key ? t(key) : type;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !email || !phone || !agreedTerms) {
-      alert('Por favor, rellene todos los campos y acepte la normativa.');
+      alert(validationAlert[language] || validationAlert['es']);
       return;
     }
 
@@ -35,7 +66,7 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
         totalPrice: costBreakdown.total,
         customerName: name,
         status: 'Confirmado',
-        bookedAt: new Date().toLocaleDateString('es-ES')
+        bookedAt: new Date().toLocaleDateString(language === 'es' ? 'es-ES' : language === 'en' ? 'en-US' : language === 'de' ? 'de-DE' : language === 'fr' ? 'fr-FR' : 'it-IT')
       };
 
       // Save to localStorage
@@ -56,12 +87,12 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
           <div className="success-icon animate-scale-in">
             <CheckCircle2 size={40} />
           </div>
-          <h3>¡Aventura Confirmada!</h3>
+          <h3>{t('bookingModal.success_title')}</h3>
           <p style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '1.1rem', marginBottom: '0.5rem' }}>
-            Código de reserva: <span style={{ color: 'var(--accent-orange)' }}>{bookingCode}</span>
+            {t('bookings.booking_code')}: <span style={{ color: 'var(--accent-orange)' }}>{bookingCode}</span>
           </p>
           <p>
-            Hemos guardado tu reserva en <strong>Mis Viajes</strong>. Se ha enviado un correo de confirmación simulado a <strong>{email}</strong> con la guía de ruta de Fuerteventura.
+            {t('bookingModal.success_desc').replace('{email}', email)}
           </p>
           
           <div className="glass" style={{
@@ -73,12 +104,12 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
             border: '1px solid rgba(255, 107, 53, 0.2)'
           }}>
             <h5 style={{ color: 'var(--accent-gold)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <Sparkles size={14} /> Recomendaciones de la Isla
+              <Sparkles size={14} /> {t('map.spots_list_title')}
             </h5>
             <ul style={{ listStyle: 'inside circle', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-              <li>Recogida del vehículo: Aeropuerto Fuerteventura (o concertado).</li>
-              <li>Traer carné de conducir en vigor (mínimo 2 años de antigüedad).</li>
-              <li>¡Respeta la naturaleza! Pernocta solo en zonas permitidas.</li>
+              <li>{t('bookingModal.info_pickup')}</li>
+              <li>{t('bookingModal.info_insurance')}</li>
+              <li>{t('bookingModal.info_support')}</li>
             </ul>
           </div>
 
@@ -90,7 +121,7 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
               onClose();
             }}
           >
-            Ir a Mis Viajes
+            {t('navbar.bookings')}
           </button>
         </div>
       </div>
@@ -106,7 +137,7 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
 
         <div style={{ padding: '2.5rem' }}>
           <h2 style={{ marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <HeartHandshake style={{ color: 'var(--accent-orange)' }} /> Confirmar Aventura
+            <HeartHandshake style={{ color: 'var(--accent-orange)' }} /> {t('bookingModal.title')}
           </h2>
 
           {/* Quick Summary */}
@@ -117,11 +148,11 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
               style={{ width: '120px', height: '80px', objectFit: 'cover', borderRadius: 'var(--radius-sm)' }} 
             />
             <div>
-              <span className="badge badge-adventure" style={{ fontSize: '0.7rem' }}>{camper.type}</span>
+              <span className="badge badge-adventure" style={{ fontSize: '0.7rem' }}>{getTypeLabel(camper.type)}</span>
               <h4 style={{ margin: '0.25rem 0 0.5rem' }}>{camper.title}</h4>
               <p style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                 <Calendar size={14} style={{ color: 'var(--accent-gold)' }} />
-                <span>{dates.startDate} al {dates.endDate} ({totalNights} noches)</span>
+                <span>{dates.startDate} {language === 'es' ? 'al' : language === 'en' ? 'to' : language === 'de' ? 'bis' : language === 'fr' ? 'au' : 'al'} {dates.endDate} ({totalNights} {t('bookings.nights')})</span>
               </p>
             </div>
           </div>
@@ -129,10 +160,10 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
           {/* Booking Form */}
           <form onSubmit={handleSubmit} className="booking-form">
             <div className="booking-field">
-              <label>Nombre Completo</label>
+              <label>{t('bookingModal.placeholder_name')}</label>
               <input 
                 type="text" 
-                placeholder="Ej. Juan Pérez" 
+                placeholder={t('bookingModal.placeholder_name')} 
                 value={name} 
                 onChange={(e) => setName(e.target.value)} 
                 required 
@@ -141,17 +172,17 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
             
             <div className="form-grid" style={{ marginBottom: 0 }}>
               <div className="booking-field">
-                <label>Correo Electrónico</label>
+                <label>{t('bookingModal.placeholder_email')}</label>
                 <input 
                   type="email" 
-                  placeholder="juan@email.com" 
+                  placeholder="name@email.com" 
                   value={email} 
                   onChange={(e) => setEmail(e.target.value)} 
                   required 
                 />
               </div>
               <div className="booking-field">
-                <label>Teléfono móvil</label>
+                <label>{t('bookingModal.placeholder_phone')}</label>
                 <input 
                   type="tel" 
                   placeholder="+34 600 000 000" 
@@ -165,19 +196,19 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
             {/* Price Summary Breakdown */}
             <div className="booking-breakdown" style={{ marginTop: '0.5rem', padding: '1rem', background: 'var(--bg-primary)', borderRadius: 'var(--radius-sm)' }}>
               <div className="breakdown-row">
-                <span>{camper.price}€ x {totalNights} noches</span>
+                <span>{camper.price}€ x {totalNights} {t('bookings.nights')}</span>
                 <span>{costBreakdown.base}€</span>
               </div>
               <div className="breakdown-row">
-                <span>Gastos de preparación e higiene</span>
+                <span>{t('details.cleaning_fee')}</span>
                 <span>{costBreakdown.cleaning}€</span>
               </div>
               <div className="breakdown-row">
-                <span>Tasa de servicio CamperVentura</span>
+                <span>{t('details.service_fee')}</span>
                 <span>{costBreakdown.service}€</span>
               </div>
               <div className="breakdown-row total">
-                <span>Total estimado</span>
+                <span>{t('details.total')}</span>
                 <span>{costBreakdown.total}€</span>
               </div>
             </div>
@@ -193,7 +224,7 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
                   required 
                 />
                 <span>
-                  Acepto la normativa de pernocta de las Islas Canarias (no acampar en playas protegidas, usar depósitos de aguas grises y dejar los espacios limpios).
+                  {termsLabel[language] || termsLabel['es']}
                 </span>
               </label>
             </div>
@@ -204,7 +235,7 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
               style={{ width: '100%', marginTop: '1rem' }}
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Procesando tu aventura...' : `Confirmar Reserva por ${costBreakdown.total}€`}
+              {isSubmitting ? t('bookingModal.btn_canceling') : `${t('bookingModal.btn_confirm')} (${costBreakdown.total}€)`}
             </button>
           </form>
         </div>

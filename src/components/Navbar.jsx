@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Compass, Menu, X, Landmark, Heart, Shield, User } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar({ activeTab, setActiveTab }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,11 +20,11 @@ export default function Navbar({ activeTab, setActiveTab }) {
   }, []);
 
   const navItems = [
-    { id: 'home', label: 'Inicio' },
-    { id: 'fleet', label: 'Explorar Campers' },
-    { id: 'guide', label: 'Guía Fuerteventura' },
-    { id: 'partner', label: 'Hazte Socio' },
-    { id: 'bookings', label: 'Mis Viajes' }
+    { id: 'home', label: t('navbar.home') },
+    { id: 'fleet', label: t('navbar.fleet') },
+    { id: 'guide', label: t('navbar.guide') },
+    { id: 'partner', label: t('navbar.partner') },
+    { id: 'bookings', label: t('navbar.bookings') }
   ];
 
   return (
@@ -60,14 +62,41 @@ export default function Navbar({ activeTab, setActiveTab }) {
           ))}
         </ul>
 
-        {/* Host CTA & Profile Mockup */}
+        {/* Host CTA, Language Selector & Profile */}
         <div className="flex align-center" style={{ gap: '1rem' }}>
+          {/* Language Selector Dropdown */}
+          <div className="lang-selector" style={{ position: 'relative' }}>
+            <select 
+              value={language} 
+              onChange={(e) => setLanguage(e.target.value)} 
+              className="lang-select glass"
+              style={{
+                padding: '0.45rem 0.65rem',
+                borderRadius: '10px',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-primary)',
+                fontSize: '0.85rem',
+                cursor: 'pointer',
+                fontWeight: '700',
+                outline: 'none',
+                fontFamily: 'var(--font-headings)'
+              }}
+            >
+              <option value="es" style={{ background: '#1c1e24' }}>🇪🇸 ES</option>
+              <option value="en" style={{ background: '#1c1e24' }}>🇬🇧 EN</option>
+              <option value="de" style={{ background: '#1c1e24' }}>🇩🇪 DE</option>
+              <option value="fr" style={{ background: '#1c1e24' }}>🇫🇷 FR</option>
+              <option value="it" style={{ background: '#1c1e24' }}>🇮🇹 IT</option>
+            </select>
+          </div>
+
           <button 
             className="btn btn-primary" 
             style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', display: activeTab === 'partner' ? 'none' : 'block' }}
             onClick={() => { setActiveTab('partner'); window.scrollTo(0, 0); }}
           >
-            Alquila tu Camper
+            {t('navbar.cta_rent')}
           </button>
           
           <div className="detail-host-avatar" style={{ cursor: 'pointer', width: '36px', height: '36px' }} title="Mi Perfil">
@@ -123,7 +152,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
               window.scrollTo(0, 0);
             }}
           >
-            Alquila tu Camper
+            {t('navbar.cta_rent')}
           </button>
         </div>
       )}
