@@ -40,12 +40,13 @@ export default function Navbar({ activeTab, setActiveTab }) {
     { id: 'bookings', label: t('navbar.bookings') }
   ];
 
+  // Using FlagCDN (PNG images) instead of system emojis to guarantee flag icons render on Windows
   const langDetails = {
-    es: { flag: "🇪🇸", name: "Español" },
-    en: { flag: "🇬🇧", name: "English" },
-    de: { flag: "🇩🇪", name: "Deutsch" },
-    fr: { flag: "🇫🇷", name: "Français" },
-    it: { flag: "🇮🇹", name: "Italiano" }
+    es: { flagUrl: "https://flagcdn.com/w40/es.png", name: "Español" },
+    en: { flagUrl: "https://flagcdn.com/w40/gb.png", name: "English" },
+    de: { flagUrl: "https://flagcdn.com/w40/de.png", name: "Deutsch" },
+    fr: { flagUrl: "https://flagcdn.com/w40/fr.png", name: "Français" },
+    it: { flagUrl: "https://flagcdn.com/w40/it.png", name: "Italiano" }
   };
 
   return (
@@ -138,22 +139,26 @@ export default function Navbar({ activeTab, setActiveTab }) {
                   onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} 
                   className="lang-trigger-btn glass"
                   style={{
-                    padding: '0.45rem 0.75rem',
+                    padding: '0.45rem 0.65rem',
                     borderRadius: '10px',
                     background: 'rgba(255, 255, 255, 0.08)',
                     border: '1px solid var(--border-color)',
-                    color: 'var(--text-primary)',
-                    fontSize: '1.2rem',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     outline: 'none',
-                    transition: 'all var(--transition-normal)'
+                    transition: 'all var(--transition-normal)',
+                    width: '42px',
+                    height: '36px'
                   }}
                   title="Seleccionar Idioma / Select Language"
                 >
-                  {langDetails[language]?.flag || "🇪🇸"}
+                  <img 
+                    src={langDetails[language]?.flagUrl} 
+                    alt={langDetails[language]?.name} 
+                    style={{ width: '22px', height: '14px', objectFit: 'cover', borderRadius: '2px', display: 'block' }} 
+                  />
                 </button>
 
                 {isLangMenuOpen && (
@@ -202,7 +207,11 @@ export default function Navbar({ activeTab, setActiveTab }) {
                         }}
                         className="lang-item-btn"
                       >
-                        <span style={{ fontSize: '1.1rem' }}>{details.flag}</span>
+                        <img 
+                          src={details.flagUrl} 
+                          alt={details.name} 
+                          style={{ width: '18px', height: '12px', objectFit: 'cover', borderRadius: '1.5px' }} 
+                        />
                         <span>{details.name}</span>
                       </button>
                     ))}
@@ -264,7 +273,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
               {t('navbar.cta_rent')}
             </button>
 
-            {/* Mobile Language Selector (spacious 2-column grid of buttons) */}
+            {/* Mobile Language Selector */}
             <div className="mobile-lang-container">
               <div className="flex align-center" style={{ gap: '0.75rem', marginBottom: '0.5rem' }}>
                 <div className="detail-host-avatar" style={{ width: '36px', height: '36px' }}>
@@ -300,7 +309,11 @@ export default function Navbar({ activeTab, setActiveTab }) {
                       outline: 'none'
                     }}
                   >
-                    <span style={{ fontSize: '1rem' }}>{details.flag}</span>
+                    <img 
+                      src={details.flagUrl} 
+                      alt={details.name} 
+                      style={{ width: '18px', height: '12px', objectFit: 'cover', borderRadius: '1.5px' }} 
+                    />
                     <span>{details.name}</span>
                   </button>
                 ))}
