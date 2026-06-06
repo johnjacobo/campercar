@@ -658,7 +658,7 @@ export default function App() {
                 src={getImageUrl('images/logo.png')} 
                 alt="CamperVentura Logo" 
                 style={{ 
-                  height: '60px', 
+                  height: '75px', 
                   objectFit: 'contain'
                 }} 
               />

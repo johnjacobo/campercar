@@ -34,8 +34,9 @@ export default function Navbar({ activeTab, setActiveTab }) {
             src={import.meta.env.BASE_URL + 'images/logo.png'} 
             alt="CamperVentura Logo" 
             style={{ 
-              height: '65px', 
-              objectFit: 'contain'
+              height: isScrolled ? '70px' : '85px', 
+              objectFit: 'contain',
+              transition: 'height var(--transition-normal)'
             }} 
           />
         </a>
