@@ -40,7 +40,7 @@ export default function AddCamperForm({ onAddSuccess }) {
   const [hostName, setHostName] = useState('');
   const [selectedAmenities, setSelectedAmenities] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
-  const [imagePack, setImagePack] = useState('/images/camper_beach.png'); // Default mock image pack
+  const [imagePack, setImagePack] = useState('images/camper_beach.png'); // Default mock image pack (relative)
 
   const handleAmenityChange = (amenity) => {
     if (selectedAmenities.includes(amenity)) {
@@ -77,7 +77,7 @@ export default function AddCamperForm({ onAddSuccess }) {
       fuel,
       images: [
         imagePack,
-        '/images/camper_interior.png'
+        'images/camper_interior.png' // Relative path
       ],
       description,
       host: {
@@ -284,12 +284,12 @@ export default function AddCamperForm({ onAddSuccess }) {
                     padding: '0.5rem',
                     borderRadius: 'var(--radius-sm)',
                     cursor: 'pointer',
-                    border: imagePack === '/images/camper_beach.png' ? '2px solid var(--accent-orange)' : '1px solid var(--border-color)',
-                    background: imagePack === '/images/camper_beach.png' ? 'rgba(255, 107, 53, 0.1)' : 'transparent'
+                    border: imagePack === 'images/camper_beach.png' ? '2px solid var(--accent-orange)' : '1px solid var(--border-color)',
+                    background: imagePack === 'images/camper_beach.png' ? 'rgba(255, 107, 53, 0.1)' : 'transparent'
                   }}
-                  onClick={() => setImagePack('/images/camper_beach.png')}
+                  onClick={() => setImagePack('images/camper_beach.png')}
                 >
-                  <img src="/images/camper_beach.png" alt="Playa Pack" style={{ borderRadius: '4px', height: '80px', width: '100%', objectFit: 'cover' }} />
+                  <img src="images/camper_beach.png" alt="Playa Pack" style={{ borderRadius: '4px', height: '80px', width: '100%', objectFit: 'cover' }} />
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', display: 'block', textAlign: 'center', marginTop: '0.25rem' }}>Pack Playa Costera</span>
                 </div>
 
@@ -300,12 +300,12 @@ export default function AddCamperForm({ onAddSuccess }) {
                     padding: '0.5rem',
                     borderRadius: 'var(--radius-sm)',
                     cursor: 'pointer',
-                    border: imagePack === '/images/camper_volcano.png' ? '2px solid var(--accent-orange)' : '1px solid var(--border-color)',
-                    background: imagePack === '/images/camper_volcano.png' ? 'rgba(255, 107, 53, 0.1)' : 'transparent'
+                    border: imagePack === 'images/camper_volcano.png' ? '2px solid var(--accent-orange)' : '1px solid var(--border-color)',
+                    background: imagePack === 'images/camper_volcano.png' ? 'rgba(255, 107, 53, 0.1)' : 'transparent'
                   }}
-                  onClick={() => setImagePack('/images/camper_volcano.png')}
+                  onClick={() => setImagePack('images/camper_volcano.png')}
                 >
-                  <img src="/images/camper_volcano.png" alt="Volcán Pack" style={{ borderRadius: '4px', height: '80px', width: '100%', objectFit: 'cover' }} />
+                  <img src="images/camper_volcano.png" alt="Volcán Pack" style={{ borderRadius: '4px', height: '80px', width: '100%', objectFit: 'cover' }} />
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', display: 'block', textAlign: 'center', marginTop: '0.25rem' }}>Pack 4x4 Volcánico</span>
                 </div>
 
@@ -316,12 +316,12 @@ export default function AddCamperForm({ onAddSuccess }) {
                     padding: '0.5rem',
                     borderRadius: 'var(--radius-sm)',
                     cursor: 'pointer',
-                    border: imagePack === '/images/camper_interior.png' ? '2px solid var(--accent-orange)' : '1px solid var(--border-color)',
-                    background: imagePack === '/images/camper_interior.png' ? 'rgba(255, 107, 53, 0.1)' : 'transparent'
+                    border: imagePack === 'images/camper_interior.png' ? '2px solid var(--accent-orange)' : '1px solid var(--border-color)',
+                    background: imagePack === 'images/camper_interior.png' ? 'rgba(255, 107, 53, 0.1)' : 'transparent'
                   }}
-                  onClick={() => setImagePack('/images/camper_interior.png')}
+                  onClick={() => setImagePack('images/camper_interior.png')}
                 >
-                  <img src="/images/camper_interior.png" alt="Interior Pack" style={{ borderRadius: '4px', height: '80px', width: '100%', objectFit: 'cover' }} />
+                  <img src="images/camper_interior.png" alt="Interior Pack" style={{ borderRadius: '4px', height: '80px', width: '100%', objectFit: 'cover' }} />
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', display: 'block', textAlign: 'center', marginTop: '0.25rem' }}>Pack Interior Cozy</span>
                 </div>
               </div>

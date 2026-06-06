@@ -130,7 +130,7 @@ export default function App() {
         className="page-parallax-bg" 
         style={{ 
           transform: `scale(1.06) translate(${mousePos.x * 25}px, ${mousePos.y * 25}px)`,
-          backgroundImage: "url('/images/epic_beach.png')"
+          backgroundImage: "url('images/epic_beach.png')"
         }} 
       />
       <div className="page-overlay" />

@@ -10,8 +10,8 @@ export const initialCampers = [
     transmission: "Manual",
     fuel: "Diésel",
     images: [
-      "/images/camper_beach.png",
-      "/images/camper_interior.png"
+      "images/camper_beach.png",
+      "images/camper_interior.png"
     ],
     description: "Perfecta furgoneta camperizada a mano en madera natural para parejas aventureras. Diseñada para despertar viendo el amanecer en Cofete. Equipamiento de primer nivel para vivir off-grid de forma totalmente autónoma.",
     host: {
@@ -41,8 +41,8 @@ export const initialCampers = [
     transmission: "Manual",
     fuel: "Diésel",
     images: [
-      "/images/camper_volcano.png",
-      "/images/camper_interior.png"
+      "images/camper_volcano.png",
+      "images/camper_interior.png"
     ],
     description: "Explora los caminos más inaccesibles y duerme sobre el techo de tu vehículo en los volcanes más espectaculares de la isla. Equipada con tracción 4x4 real y una tienda de techo rígida de apertura rápida de 2 segundos.",
     host: {
@@ -73,9 +73,9 @@ export const initialCampers = [
     transmission: "Automático",
     fuel: "Diésel",
     images: [
-      "/images/camper_beach.png",
-      "/images/camper_volcano.png",
-      "/images/camper_interior.png"
+      "images/camper_beach.png",
+      "images/camper_volcano.png",
+      "images/camper_interior.png"
     ],
     description: "Tu hogar de lujo en movimiento por toda la isla. Disfruta de la máxima comodidad con baño completo (ducha interior caliente y W.C. químico), amplia cocina con salón y capacidad para toda la familia o grupo de amigos.",
     host: {
