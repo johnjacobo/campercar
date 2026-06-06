@@ -5,6 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 export default function Navbar({ activeTab, setActiveTab }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
@@ -19,6 +20,18 @@ export default function Navbar({ activeTab, setActiveTab }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle click outside of custom dropdown to close it
+  useEffect(() => {
+    if (!isLangMenuOpen) return;
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.lang-selector-wrapper')) {
+        setIsLangMenuOpen(false);
+      }
+    };
+    window.addEventListener('click', handleOutsideClick);
+    return () => window.removeEventListener('click', handleOutsideClick);
+  }, [isLangMenuOpen]);
+
   const navItems = [
     { id: 'home', label: t('navbar.home') },
     { id: 'fleet', label: t('navbar.fleet') },
@@ -26,6 +39,14 @@ export default function Navbar({ activeTab, setActiveTab }) {
     { id: 'partner', label: t('navbar.partner') },
     { id: 'bookings', label: t('navbar.bookings') }
   ];
+
+  const langDetails = {
+    es: { flag: "🇪🇸", name: "Español" },
+    en: { flag: "🇬🇧", name: "English" },
+    de: { flag: "🇩🇪", name: "Deutsch" },
+    fr: { flag: "🇫🇷", name: "Français" },
+    it: { flag: "🇮🇹", name: "Italiano" }
+  };
 
   return (
     <>
@@ -37,6 +58,13 @@ export default function Navbar({ activeTab, setActiveTab }) {
         }
         .mobile-lang-container {
           display: none;
+        }
+        .lang-item-btn:hover {
+          background: rgba(255, 255, 255, 0.05) !important;
+        }
+        .lang-trigger-btn:hover {
+          background: rgba(255, 255, 255, 0.15) !important;
+          transform: translateY(-1px);
         }
         @media (max-width: 768px) {
           .desktop-header-actions {
@@ -90,7 +118,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
           {/* Header Actions */}
           <div className="flex align-center" style={{ gap: '1rem' }}>
             
-            {/* Desktop-only Actions: CTA -> Profile -> Language Selector */}
+            {/* Desktop Actions: CTA -> Profile -> Custom Language Dropdown */}
             <div className="desktop-header-actions">
               <button 
                 className="btn btn-primary" 
@@ -104,31 +132,82 @@ export default function Navbar({ activeTab, setActiveTab }) {
                 <User size={18} />
               </div>
 
-              {/* Language Selector Dropdown (placed to the right of profile on desktop) */}
-              <div className="lang-selector" style={{ position: 'relative' }}>
-                <select 
-                  value={language} 
-                  onChange={(e) => setLanguage(e.target.value)} 
-                  className="lang-select glass"
+              {/* Custom Language Selector (shows selected flag when closed, full names when opened) */}
+              <div className="lang-selector-wrapper" style={{ position: 'relative' }}>
+                <button 
+                  onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} 
+                  className="lang-trigger-btn glass"
                   style={{
-                    padding: '0.45rem 0.65rem',
+                    padding: '0.45rem 0.75rem',
                     borderRadius: '10px',
                     background: 'rgba(255, 255, 255, 0.08)',
                     border: '1px solid var(--border-color)',
                     color: 'var(--text-primary)',
-                    fontSize: '0.85rem',
+                    fontSize: '1.2rem',
                     cursor: 'pointer',
-                    fontWeight: '700',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     outline: 'none',
-                    fontFamily: 'var(--font-headings)'
+                    transition: 'all var(--transition-normal)'
                   }}
+                  title="Seleccionar Idioma / Select Language"
                 >
-                  <option value="es" style={{ background: '#1c1e24' }}>🇪🇸 Español</option>
-                  <option value="en" style={{ background: '#1c1e24' }}>🇬🇧 English</option>
-                  <option value="de" style={{ background: '#1c1e24' }}>🇩🇪 Deutsch</option>
-                  <option value="fr" style={{ background: '#1c1e24' }}>🇫🇷 Français</option>
-                  <option value="it" style={{ background: '#1c1e24' }}>🇮🇹 Italiano</option>
-                </select>
+                  {langDetails[language]?.flag || "🇪🇸"}
+                </button>
+
+                {isLangMenuOpen && (
+                  <div 
+                    className="glass" 
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      right: 0,
+                      marginTop: '0.5rem',
+                      borderRadius: '10px',
+                      background: 'rgba(22, 24, 31, 0.95)',
+                      border: '1px solid var(--border-color)',
+                      minWidth: '160px',
+                      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
+                      zIndex: 1100,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      padding: '0.35rem',
+                      animation: 'scaleIn 0.15s ease-out'
+                    }}
+                  >
+                    {Object.entries(langDetails).map(([code, details]) => (
+                      <button
+                        key={code}
+                        onClick={() => {
+                          setLanguage(code);
+                          setIsLangMenuOpen(false);
+                        }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.75rem',
+                          padding: '0.6rem 0.8rem',
+                          borderRadius: '6px',
+                          color: language === code ? 'var(--accent-orange)' : 'var(--text-primary)',
+                          background: language === code ? 'rgba(255, 107, 53, 0.08)' : 'transparent',
+                          cursor: 'pointer',
+                          textAlign: 'left',
+                          fontWeight: language === code ? '700' : '500',
+                          fontSize: '0.85rem',
+                          transition: 'background 0.15s ease',
+                          width: '100%',
+                          outline: 'none',
+                          border: 'none'
+                        }}
+                        className="lang-item-btn"
+                      >
+                        <span style={{ fontSize: '1.1rem' }}>{details.flag}</span>
+                        <span>{details.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
             
@@ -185,7 +264,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
               {t('navbar.cta_rent')}
             </button>
 
-            {/* Mobile Language Selector & Profile section */}
+            {/* Mobile Language Selector (spacious 2-column grid of buttons) */}
             <div className="mobile-lang-container">
               <div className="flex align-center" style={{ gap: '0.75rem', marginBottom: '0.5rem' }}>
                 <div className="detail-host-avatar" style={{ width: '36px', height: '36px' }}>
@@ -194,36 +273,38 @@ export default function Navbar({ activeTab, setActiveTab }) {
                 <span style={{ fontWeight: '600', fontSize: '0.95rem' }}>{t('navbar.bookings')} (Perfil)</span>
               </div>
               
-              <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--accent-gold)', marginTop: '0.25rem' }}>
+              <label style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--accent-gold)', marginBottom: '0.5rem', display: 'block' }}>
                 {language === 'es' ? 'Seleccionar Idioma' : language === 'en' ? 'Select Language' : language === 'de' ? 'Sprache auswählen' : language === 'fr' ? 'Choisir la langue' : 'Seleziona lingua'}
               </label>
-              <select 
-                value={language} 
-                onChange={(e) => {
-                  setLanguage(e.target.value);
-                  setIsMobileMenuOpen(false);
-                }} 
-                className="lang-select glass"
-                style={{
-                  padding: '0.5rem',
-                  borderRadius: '10px',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                  fontWeight: '700',
-                  outline: 'none',
-                  width: '100%',
-                  fontFamily: 'var(--font-headings)'
-                }}
-              >
-                <option value="es" style={{ background: '#1c1e24' }}>🇪🇸 Español</option>
-                <option value="en" style={{ background: '#1c1e24' }}>🇬🇧 English</option>
-                <option value="de" style={{ background: '#1c1e24' }}>🇩🇪 Deutsch</option>
-                <option value="fr" style={{ background: '#1c1e24' }}>🇫🇷 Français</option>
-                <option value="it" style={{ background: '#1c1e24' }}>🇮🇹 Italiano</option>
-              </select>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
+                {Object.entries(langDetails).map(([code, details]) => (
+                  <button
+                    key={code}
+                    onClick={() => {
+                      setLanguage(code);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.5rem 0.75rem',
+                      borderRadius: '8px',
+                      color: language === code ? 'var(--accent-orange)' : 'var(--text-primary)',
+                      background: language === code ? 'rgba(255, 107, 53, 0.1)' : 'rgba(255, 255, 255, 0.05)',
+                      border: language === code ? '1px solid var(--accent-orange)' : '1px solid var(--border-color)',
+                      cursor: 'pointer',
+                      fontWeight: '600',
+                      fontSize: '0.8rem',
+                      outline: 'none'
+                    }}
+                  >
+                    <span style={{ fontSize: '1rem' }}>{details.flag}</span>
+                    <span>{details.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}
