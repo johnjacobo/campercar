@@ -35,9 +35,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
             alt="CamperVentura Logo" 
             style={{ 
               height: '65px', 
-              objectFit: 'contain',
-              filter: 'invert(1)',
-              mixBlendMode: 'screen'
+              objectFit: 'contain'
             }} 
           />
         </a>

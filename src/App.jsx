@@ -659,9 +659,7 @@ export default function App() {
                 alt="CamperVentura Logo" 
                 style={{ 
                   height: '60px', 
-                  objectFit: 'contain',
-                  filter: 'invert(1)',
-                  mixBlendMode: 'screen'
+                  objectFit: 'contain'
                 }} 
               />
             </a>
