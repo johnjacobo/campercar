@@ -655,7 +655,7 @@ export default function App() {
           <div className="footer-brand">
             <a href="#home" className="logo-container" onClick={(e) => { e.preventDefault(); setActiveTab('home'); }} style={{ alignSelf: 'flex-start' }}>
               <img 
-                src={getImageUrl('images/logo.png')} 
+                src={getImageUrl('images/logo.png?v=2')} 
                 alt="CamperVentura Logo" 
                 style={{ 
                   height: '75px', 

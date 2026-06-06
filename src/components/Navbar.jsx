@@ -31,7 +31,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
         {/* Logo */}
         <a href="#home" className="logo-container" onClick={(e) => { e.preventDefault(); setActiveTab('home'); }} style={{ padding: 0 }}>
           <img 
-            src={import.meta.env.BASE_URL + 'images/logo.png'} 
+            src={import.meta.env.BASE_URL + 'images/logo.png?v=2'} 
             alt="CamperVentura Logo" 
             style={{ 
               height: isScrolled ? '70px' : '85px', 
