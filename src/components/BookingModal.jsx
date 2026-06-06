@@ -112,7 +112,7 @@ export default function BookingModal({ camper, dates, totalNights, costBreakdown
           {/* Quick Summary */}
           <div className="flex align-center gap-4" style={{ gap: '1.5rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
             <img 
-              src={camper.images[0]} 
+              src={camper.images[0].startsWith('http') ? camper.images[0] : import.meta.env.BASE_URL + camper.images[0]} 
               alt={camper.title} 
               style={{ width: '120px', height: '80px', objectFit: 'cover', borderRadius: 'var(--radius-sm)' }} 
             />

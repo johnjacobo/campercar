@@ -13,7 +13,7 @@ export default function CamperCard({ camper, onViewDetails }) {
     <div className="camper-card glass animate-scale-in" onClick={onViewDetails} style={{ cursor: 'pointer' }}>
       <div className="camper-img-container">
         <img
-          src={camper.images[0]}
+          src={camper.images[0].startsWith('http') ? camper.images[0] : import.meta.env.BASE_URL + camper.images[0]}
           alt={camper.title}
           className="camper-img"
           onError={(e) => {

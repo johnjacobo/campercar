@@ -51,6 +51,13 @@ export default function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const getImageUrl = (path) => {
+    if (!path) return '';
+    if (path.startsWith('http')) return path;
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    return import.meta.env.BASE_URL + cleanPath;
+  };
+
   const loadCampers = () => {
     // Get custom listings from localStorage
     const storedCustom = JSON.parse(localStorage.getItem('camper_custom_listings') || '[]');
@@ -130,7 +137,7 @@ export default function App() {
         className="page-parallax-bg" 
         style={{ 
           transform: `scale(1.06) translate(${mousePos.x * 25}px, ${mousePos.y * 25}px)`,
-          backgroundImage: "url('images/epic_beach.png')"
+          backgroundImage: `url('${getImageUrl('images/epic_beach.png')}')`
         }} 
       />
       <div className="page-overlay" />
@@ -437,7 +444,7 @@ export default function App() {
                 {bookings.map((booking) => (
                   <div key={booking.id} className="glass" style={{ padding: '1.75rem', borderRadius: 'var(--radius-md)', display: 'grid', gridTemplateColumns: '1.2fr 2fr 1fr', gap: '2rem', alignItems: 'center', border: '1px solid var(--border-color)' }}>
                     <img 
-                      src={booking.camperImage} 
+                      src={getImageUrl(booking.camperImage)} 
                       alt={booking.camperTitle} 
                       style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: 'var(--radius-sm)' }} 
                     />
@@ -502,14 +509,14 @@ export default function App() {
               {/* Image Gallery Grid */}
               <div className="detail-gallery">
                 <div className="gallery-main">
-                  <img src={selectedCamper.images[0]} alt={selectedCamper.title} />
+                  <img src={getImageUrl(selectedCamper.images[0])} alt={selectedCamper.title} />
                 </div>
                 <div className="gallery-thumbs">
                   <div className="gallery-thumb">
-                    <img src={selectedCamper.images[1] || selectedCamper.images[0]} alt={selectedCamper.title} />
+                    <img src={getImageUrl(selectedCamper.images[1] || selectedCamper.images[0])} alt={selectedCamper.title} />
                   </div>
                   <div className="gallery-thumb">
-                    <img src={selectedCamper.images[2] || selectedCamper.images[1] || selectedCamper.images[0]} alt={selectedCamper.title} />
+                    <img src={getImageUrl(selectedCamper.images[2] || selectedCamper.images[1] || selectedCamper.images[0])} alt={selectedCamper.title} />
                   </div>
                 </div>
               </div>
