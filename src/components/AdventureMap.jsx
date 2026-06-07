@@ -583,10 +583,22 @@ export default function AdventureMap() {
           }
         }
         
-        /* Mobile styles: hide bottom card, style inline accordion */
+        /* Mobile styles: hide bottom card, style inline accordion and buttons */
         @media (max-width: 768px) {
           .desktop-only-info-card {
             display: none !important;
+          }
+          .category-tabs-container {
+            flex-direction: column !important;
+            width: 100%;
+            gap: 0.5rem !important;
+            padding: 0 0.5rem !important;
+          }
+          .category-tabs-container button {
+            width: 100% !important;
+            justify-content: center;
+            font-size: 0.82rem !important;
+            padding: 0.65rem 1rem !important;
           }
           .spot-item-expanded-inline {
             display: flex !important;
@@ -611,7 +623,7 @@ export default function AdventureMap() {
           </h4>
           
           {/* Pestañas de Categoría */}
-          <div className="flex" style={{ gap: '0.35rem', marginBottom: '1.25rem', padding: '0 0.5rem', flexWrap: 'wrap' }}>
+          <div className="category-tabs-container flex" style={{ gap: '0.35rem', marginBottom: '1.25rem', padding: '0 0.5rem', flexWrap: 'wrap' }}>
             {['regulations', 'adventure', 'service'].map((cat) => {
               const Icon = cat === 'regulations' ? Shield : (cat === 'service' ? Droplet : Compass);
               return (
