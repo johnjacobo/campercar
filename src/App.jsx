@@ -593,74 +593,72 @@ export default function App() {
                 </div>
 
                 {/* Right side: Sticky Booking Card Widget */}
-                <div>
-                  <div className="booking-card glass" style={{ background: 'var(--bg-secondary)' }}>
-                    <div className="booking-price">
-                      {selectedCamper.price}€ <span>/ {t('details.nights_count')}</span>
+                <div className="booking-card glass" style={{ background: 'var(--bg-secondary)' }}>
+                  <div className="booking-price">
+                    {selectedCamper.price}€ <span>/ {t('details.nights_count')}</span>
+                  </div>
+
+                  <form className="booking-form" onSubmit={(e) => { e.preventDefault(); if(nights > 0) setShowBookingModal(true); }}>
+                    <div className="booking-field">
+                      <label>{t('details.delivery_location')}</label>
+                      <select>
+                        {selectedCamper.locations.map(loc => (
+                          <option key={loc} value={loc}>{loc} (Fuerteventura)</option>
+                        ))}
+                      </select>
                     </div>
 
-                    <form className="booking-form" onSubmit={(e) => { e.preventDefault(); if(nights > 0) setShowBookingModal(true); }}>
-                      <div className="booking-field">
-                        <label>{t('details.delivery_location')}</label>
-                        <select>
-                          {selectedCamper.locations.map(loc => (
-                            <option key={loc} value={loc}>{loc} (Fuerteventura)</option>
-                          ))}
-                        </select>
-                      </div>
+                    <div className="booking-field">
+                      <label>{t('details.pickup_date')}</label>
+                      <input 
+                        type="date" 
+                        value={checkInDate} 
+                        onChange={(e) => setCheckInDate(e.target.value)} 
+                        required 
+                      />
+                    </div>
 
-                      <div className="booking-field">
-                        <label>{t('details.pickup_date')}</label>
-                        <input 
-                          type="date" 
-                          value={checkInDate} 
-                          onChange={(e) => setCheckInDate(e.target.value)} 
-                          required 
-                        />
-                      </div>
+                    <div className="booking-field">
+                      <label>{t('details.return_date')}</label>
+                      <input 
+                        type="date" 
+                        value={checkOutDate} 
+                        onChange={(e) => setCheckOutDate(e.target.value)} 
+                        required 
+                      />
+                    </div>
 
-                      <div className="booking-field">
-                        <label>{t('details.return_date')}</label>
-                        <input 
-                          type="date" 
-                          value={checkOutDate} 
-                          onChange={(e) => setCheckOutDate(e.target.value)} 
-                          required 
-                        />
-                      </div>
-
-                      {nights > 0 ? (
-                        <>
-                          <div className="booking-breakdown animate-scale-in">
-                            <div className="breakdown-row">
-                              <span>{selectedCamper.price}€ x {nights} {t('details.nights_count')}</span>
-                              <span>{breakdown.base}€</span>
-                            </div>
-                            <div className="breakdown-row">
-                              <span>{t('details.cleaning_fee')}</span>
-                              <span>{breakdown.cleaning}€</span>
-                            </div>
-                            <div className="breakdown-row">
-                              <span>{t('details.service_fee')}</span>
-                              <span>{breakdown.service}€</span>
-                            </div>
-                            <div className="breakdown-row total">
-                              <span>{t('details.total')}</span>
-                              <span>{breakdown.total}€</span>
-                            </div>
+                    {nights > 0 ? (
+                      <>
+                        <div className="booking-breakdown animate-scale-in">
+                          <div className="breakdown-row">
+                            <span>{selectedCamper.price}€ x {nights} {t('details.nights_count')}</span>
+                            <span>{breakdown.base}€</span>
                           </div>
+                          <div className="breakdown-row">
+                            <span>{t('details.cleaning_fee')}</span>
+                            <span>{breakdown.cleaning}€</span>
+                          </div>
+                          <div className="breakdown-row">
+                            <span>{t('details.service_fee')}</span>
+                            <span>{breakdown.service}€</span>
+                          </div>
+                          <div className="breakdown-row total">
+                            <span>{t('details.total')}</span>
+                            <span>{breakdown.total}€</span>
+                          </div>
+                        </div>
 
-                          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-                            {t('details.btn_book')}
-                          </button>
-                        </>
-                      ) : (
-                        <button type="button" className="btn btn-secondary" style={{ width: '100%', cursor: 'not-allowed' }} disabled>
-                          {t('details.btn_invalid_dates')}
+                        <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
+                          {t('details.btn_book')}
                         </button>
-                      )}
-                    </form>
-                  </div>
+                      </>
+                    ) : (
+                      <button type="button" className="btn btn-secondary" style={{ width: '100%', cursor: 'not-allowed' }} disabled>
+                        {t('details.btn_invalid_dates')}
+                      </button>
+                    )}
+                  </form>
                 </div>
               </div>
             </div>

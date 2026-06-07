@@ -63,6 +63,20 @@ export default function Navbar({ activeTab, setActiveTab }) {
             display: none !important;
           }
         }
+        @media (max-width: 576px) {
+          .logo-container img {
+            height: 52px !important;
+          }
+          .navbar {
+            height: 70px !important;
+          }
+          .navbar.scrolled {
+            height: 60px !important;
+          }
+          .navbar.scrolled img {
+            height: 46px !important;
+          }
+        }
       `}</style>
 
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''} glass`}>

@@ -564,6 +564,15 @@ button, input, textarea, select {
   font-weight: 500;
   color: var(--text-primary);
   width: 100%;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.search-group input:focus,
+.search-group select:focus {
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.25);
 }
 
 .search-group input[type="date"]::-webkit-calendar-picker-indicator {
@@ -636,14 +645,14 @@ button, input, textarea, select {
   display: flex;
   flex-direction: column;
   height: 100%;
-  transition: all var(--transition-normal);
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
   border: 1px solid var(--border-color);
 }
 
 .camper-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255, 107, 53, 0.2);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  transform: translateY(-10px) scale(1.015);
+  border-color: var(--accent-orange);
+  box-shadow: 0 20px 40px rgba(255, 107, 53, 0.22);
 }
 
 .camper-img-container {
@@ -975,11 +984,13 @@ button, input, textarea, select {
   border-radius: var(--radius-sm);
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
 }
 
 .booking-field input:focus,
 .booking-field select:focus {
   border-color: var(--accent-orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
 }
 
 .booking-breakdown {
