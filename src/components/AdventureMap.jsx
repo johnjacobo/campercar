@@ -106,8 +106,8 @@ const spots = [
     description: {
       es: 'La joya salvaje de la isla. 12 km de playa virgen custodiada por montañas de más de 800m. Acceso por pista de tierra de aventura. Pernoctar aquí en camper es una experiencia mística.',
       en: 'The wild jewel of the island. 12 km of pristine beach guarded by mountains over 800m. Access by dirt track adventure. Spending the night here in a camper is a mystical experience.',
-      de: 'Das wilde Juwel der Insel. 12 km unberührter Strand, bewacht von über 800 m hohen Bergen. Zufahrt über eine abenteuerliche Schotterpiste. Die Nacht hier im Camper zu verbringen, ist eine mystische Erfahrung.',
-      fr: "Le joyau sauvage de l'île. 12 km de plage vierge gardée par des montagnes de plus de 800m. Accès par piste de terre d'aventure. Passer la nuit ici en camper es une expérience mystique.",
+      de: 'Das wilde Juwel der Insel. 12 km unberührter Strand, bewacht von über 800 m hohen Bergen. Zufahrt über eine abenteuerliche Schotterpiste. Die Nacht hier im Camper zu verbringen, is eine mystische Erfahrung.',
+      fr: "Le joyau sauvage de l'île. 12 km de plage vierge gardée par des montagnes de plus de 800m. Accès par piste de terre d'aventure. Passer la nuit ici en camper est une expérience mystique.",
       it: "Il gioiello selvaggio dell'isola. 12 km di spiaggia incontaminata custodita da montagne di oltre 800m. Accesso da pista sterrata d'avventura. Pernottare qui in camper è un'esperienza mistica."
     },
     activity: {
@@ -137,7 +137,7 @@ const spots = [
       en: 'A huge sand barrier creates a 4km long natural tidal lagoon. The world epicenter of Windsurfing and ideal for resting while feeling the breeze.',
       de: 'Eine riesige Sandbarriere bildet eine 4 km lange natürliche Gezeitenlagune. Das weltweite Epizentrum des Windsurfens und ideal zum Ausruhen, während man die Brise spürt.',
       fr: "Une immense barrière de sable crée une lagune de marée naturelle de 4 km de long. L'épicentre mondial de la planche à voile et idéal pour se reposer en sentant la brise.",
-      it: "Una enorme barriera di sabbia crea una laguna di marea naturale lunga 4 km. L'epicentro mondiale del Windsurf e ideale per riposare sentendo la brezza."
+      it: "Una enorme barriera di sabbia crea una laguna di marea naturale lunga 4 km. L'epicentro mundial de Windsurf e ideale per riposare sentendo la brezza."
     },
     activity: {
       es: 'Windsurf, Yoga, Relax',
@@ -169,7 +169,7 @@ const spots = [
       en: 'Service station well known by motorhome owners in Puerto del Rosario. Equipped with a grate for gray water drainage and an area for black water disposal. Please ask the staff before using the services.',
       de: 'Tankstelle, die unter Wohnmobilisten in Puerto del Rosario sehr bekannt ist. Sie verfügt über ein Gitter zur Entsorgung von Grauwasser und eine Vorrichtung zur Entsorgung von Schwarzwasser. Bitte fragen Sie das Personal vor der Nutzung.',
       fr: 'Station-service bien connue des camping-caristes à Puerto del Rosario. Équipée d\'une grille pour l\'évacuation des eaux grises et d\'un point pour les eaux noires. Veuillez demander au personnel avant l\'utilisation.',
-      it: 'Stazione di servizio molto conosciuta dai camperisti a Puerto del Rosario. Dispone di una griglia per lo scarico delle acque grigie e di un punto abilitato per lo scarico delle acque nere. Chiedere al personale prima dell\'uso.'
+      it: 'Stazione di servicio molto conosciuta dai camperisti a Puerto del Rosario. Dispone di una griglia per lo scarico delle acque grigie e di un punto abilitato per lo scarico delle acque nere. Chiedere al personale prima dell\'uso.'
     },
     activity: {
       es: 'Aguas Grises, Aguas Negras, Gasolinera',
@@ -259,7 +259,7 @@ const spots = [
       en: 'Excellent free eco-station promoted locally. Allows a full water exchange (gray and black water disposal, plus fresh water intake). Easily accessible from the main FV-2 highway.',
       de: 'Hervorragende, lokal geförderte kostenlose Öko-Entsorgungsstelle. Ermöglicht kompletten Wasserwechsel (Entsorgung von Grau- und Schwarzwasser, Frischwasseranschluss). Einfacher Zugang von der FV-2.',
       fr: 'Excellente station écologique gratuite promue localement. Permet un changement d\'eau complet (vidange des eaux grises, noires et prise d\'eau propre). Facilement accessible depuis la FV-2.',
-      it: 'Eccellente punto ecologico gratuito promosso a livello locale. Consente il cambio completo delle acque (scarico acque grigie, nere e allacciamento agua pulita). Facilmente accessibile dalla FV-2.'
+      it: 'Eccellente punto ecologico gratuito promosso a livello locale. Consente il cambio completo delle acque (scarico acque grigie, nere e allacciamento acqua pulita). Facilmente accessibile dalla FV-2.'
     },
     activity: {
       es: 'Aguas Completas, Gratis, Acceso FV-2',
@@ -319,7 +319,7 @@ const spots = [
       en: 'Located in the tourist hub of Corralejo. Features free gray and black water disposal services. Fresh water refill is available using paid tokens.',
       de: 'Liegt im Tourismuszentrum von Corralejo. Bietet kostenlose Grauwasser- und Schwarzwasserentsorgung. Frischwasserbefüllung ist gegen Wertmarken möglich.',
       fr: 'Située dans le centre touristique de Corralejo. Propose des services de vidange d\'eaux grises et noires gratuits. Remplissage d\'eau propre disponible via jetons payants.',
-      it: 'Situata nel centro turistico di Corralejo. Dispone di servizi per lo scarico di acque grigie e nere gratuiti. Il rifornimento di agua pulita è a pagamento tramite gettoni.'
+      it: 'Situata nel centro turistico di Corralejo. Dispone di servizi per lo scarico di acque grigie e nere gratuiti. Il rifornimento di acqua pulita è a pagamento tramite gettoni.'
     },
     activity: {
       es: 'Vaciado Gratis, Corralejo, Gasolinera',
@@ -363,6 +363,25 @@ export default function AdventureMap() {
   return (
     <>
       <style>{`
+        .horizontal-spot-item {
+          flex: 0 0 250px;
+          padding: 1rem;
+          border-radius: var(--radius-md);
+          border: 1px solid var(--border-color);
+          cursor: pointer;
+          transition: all var(--transition-normal);
+          background: rgba(15, 17, 23, 0.45);
+        }
+        .horizontal-spot-item:hover {
+          transform: translateY(-5px) !important;
+          background: var(--bg-tertiary);
+          border-color: var(--accent-gold);
+        }
+        .horizontal-spot-item.active {
+          background: var(--bg-tertiary);
+          border-color: var(--accent-gold);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
         @media (max-width: 768px) {
           .popup-image-container {
             display: none !important;
@@ -370,15 +389,16 @@ export default function AdventureMap() {
         }
       `}</style>
       
-      <div className="adventure-layout">
-        {/* Barra Lateral con Pestañas y Lista */}
-        <div className="spots-list">
-          <h4 style={{ marginBottom: '0.85rem', padding: '0 0.5rem', color: 'var(--accent-gold)' }}>
+      <div className="adventure-layout" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', gridTemplateColumns: 'none' }}>
+        
+        {/* Fila superior: Título y Filtros de Categorías */}
+        <div className="flex align-center justify-between" style={{ width: '100%', flexWrap: 'wrap', gap: '1rem', padding: '0 0.5rem' }}>
+          <h4 style={{ color: 'var(--accent-gold)', fontSize: '1.2rem', fontWeight: '700', margin: 0 }}>
             {t('map.spots_list_title')}
           </h4>
           
           {/* Pestañas de Categoría */}
-          <div className="flex" style={{ gap: '0.35rem', marginBottom: '1.25rem', padding: '0 0.5rem', flexWrap: 'wrap' }}>
+          <div className="flex" style={{ gap: '0.35rem', flexWrap: 'wrap' }}>
             {['all', 'adventure', 'service'].map((cat) => (
               <button
                 key={cat}
@@ -401,41 +421,10 @@ export default function AdventureMap() {
               </button>
             ))}
           </div>
-
-          {/* Lista Filtrada */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '380px', overflowY: 'auto', padding: '0 0.25rem' }}>
-            {filteredSpots.map((spot) => (
-              <div
-                key={spot.id}
-                className={`spot-item ${activeSpot.id === spot.id ? 'active' : ''}`}
-                onClick={() => setActiveSpot(spot)}
-                style={{
-                  borderLeft: activeSpot.id === spot.id 
-                    ? `4px solid ${spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'}` 
-                    : '1px solid var(--border-color)'
-                }}
-              >
-                <div className="spot-title-row">
-                  <h4>{spot.name}</h4>
-                  <span 
-                    className="spot-tag"
-                    style={{
-                      color: spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-gold)'
-                    }}
-                  >
-                    {getLocalized(spot.activity).split(',')[0]}
-                  </span>
-                </div>
-                <p style={{ fontSize: '0.9rem', color: activeSpot.id === spot.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
-                  {getLocalized(spot.type)}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
 
-        {/* Contenedor del Mapa SVG */}
-        <div className="map-container glass">
+        {/* Contenedor del Mapa SVG (Ancho Completo) */}
+        <div className="map-container glass" style={{ width: '100%', height: '480px' }}>
           <svg viewBox="0 0 500 500" className="map-svg">
             {/* Cuadrícula estética de fondo */}
             <defs>
@@ -607,6 +596,62 @@ export default function AdventureMap() {
             </div>
           )}
         </div>
+
+        {/* Fila inferior: Carrusel Horizontal de Tarjetas */}
+        <div style={{ width: '100%', marginTop: '0.25rem' }}>
+          <div 
+            style={{ 
+              display: 'flex', 
+              flexDirection: 'row', 
+              gap: '1rem', 
+              overflowX: 'auto', 
+              padding: '0.5rem 0.25rem 1rem',
+              scrollBehavior: 'smooth'
+            }}
+          >
+            {filteredSpots.map((spot) => (
+              <div
+                key={spot.id}
+                className={`horizontal-spot-item ${activeSpot.id === spot.id ? 'active' : ''}`}
+                onClick={() => setActiveSpot(spot)}
+                style={{
+                  borderTop: activeSpot.id === spot.id 
+                    ? `4px solid ${spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'}` 
+                    : '1px solid var(--border-color)'
+                }}
+              >
+                {/* Miniatura en la tarjeta */}
+                <div style={{ height: '100px', width: '100%', borderRadius: '8px', overflow: 'hidden', marginBottom: '0.75rem', background: 'var(--bg-tertiary)' }}>
+                  <img 
+                    src={import.meta.env.BASE_URL + spot.image} 
+                    alt={spot.name} 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  />
+                </div>
+                
+                <div className="spot-title-row" style={{ marginBottom: '0.25rem' }}>
+                  <h4 style={{ fontSize: '0.95rem', fontWeight: '700', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>
+                    {spot.name}
+                  </h4>
+                  <span 
+                    className="spot-tag"
+                    style={{
+                      color: spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-gold)',
+                      fontSize: '0.68rem',
+                      fontWeight: '700'
+                    }}
+                  >
+                    {getLocalized(spot.activity).split(',')[0]}
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.8rem', color: activeSpot.id === spot.id ? 'var(--text-primary)' : 'var(--text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {getLocalized(spot.type)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </>
   );
