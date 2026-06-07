@@ -600,6 +600,9 @@ export default function AdventureMap() {
             font-size: 0.82rem !important;
             padding: 0.65rem 1rem !important;
           }
+          .spot-item {
+            padding: 1rem !important;
+          }
           .spot-item-expanded-inline {
             display: flex !important;
             flex-direction: column;
@@ -698,11 +701,21 @@ export default function AdventureMap() {
                 {/* Inline Accordion for Mobile */}
                 {activeSpot.id === spot.id && (
                   <div className="spot-item-expanded-inline animate-fade-in">
-                    <div style={{ width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', background: 'var(--bg-tertiary)', marginBottom: '0.5rem' }}>
+                    <div style={{ 
+                      width: '100%', 
+                      height: '150px', 
+                      borderRadius: '8px', 
+                      overflow: 'hidden', 
+                      position: 'relative', 
+                      background: 'var(--bg-tertiary)', 
+                      marginBottom: '0.5rem',
+                      display: 'block',
+                      maxWidth: '100%'
+                    }}>
                       <img 
                         src={import.meta.env.BASE_URL + spot.image} 
                         alt={spot.name} 
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
                       />
                     </div>
                     <p style={{ fontSize: '0.82rem', lineHeight: '1.4', color: 'var(--text-secondary)', margin: '0 0 0.75rem' }}>
