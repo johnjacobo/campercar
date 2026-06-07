@@ -1415,3 +1415,17 @@ button, input, textarea, select {
   font-size: 0.9rem;
   color: var(--text-muted);
 }
+
+.floating-home-btn {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.floating-home-btn:hover {
+  transform: scale(1.15) translateY(-3px);
+  background: #ff8243 !important;
+  box-shadow: 0 15px 35px rgba(255, 107, 53, 0.6) !important;
+}
+
+.floating-home-btn:active {
+  transform: scale(0.95) translateY(0);
+}

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { 
   Compass, Star, MapPin, Calendar, Users, CheckCircle, 
   TrendingUp, Sparkles, Map, Plus, Search, Award, Info, 
-  CalendarDays, ShieldCheck, HeartHandshake, Eye, X, ArrowUpRight
+  CalendarDays, ShieldCheck, HeartHandshake, Eye, X, ArrowUpRight,
+  Home, ArrowLeft
 } from 'lucide-react';
 
 // Import local components
@@ -527,14 +528,37 @@ export default function App() {
       {selectedCamper && (
         <div className="animate-fade-in" style={{ paddingTop: '100px', paddingBottom: '5rem' }}>
           <section className="container">
-            {/* Back Navigation button */}
-            <button 
-              className="btn btn-secondary" 
-              style={{ marginBottom: '2rem' }}
-              onClick={() => setSelectedCamper(null)}
-            >
-              {t('details.back')}
-            </button>
+            {/* Back Navigation bar */}
+            <div className="flex align-center justify-between" style={{ marginBottom: '2rem', gap: '1rem', flexWrap: 'wrap', width: '100%' }}>
+              <button 
+                className="btn btn-secondary" 
+                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}
+                onClick={() => setSelectedCamper(null)}
+              >
+                <ArrowLeft size={16} />
+                {t('details.back')}
+              </button>
+              
+              <button 
+                className="btn btn-primary" 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.5rem', 
+                  margin: 0, 
+                  padding: '0.45rem 1rem', 
+                  background: 'rgba(255, 255, 255, 0.05)', 
+                  color: 'white', 
+                  border: '1px solid var(--border-color)',
+                  boxShadow: 'none',
+                  minHeight: 'auto'
+                }}
+                onClick={() => { setSelectedCamper(null); setActiveTab('home'); }}
+              >
+                <Home size={16} style={{ color: 'var(--accent-orange)' }} />
+                {language === 'es' ? 'Volver al Inicio' : 'Return to Home'}
+              </button>
+            </div>
 
             <div className="glass" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', border: '1px solid var(--border-color)' }}>
               {/* Image Gallery Grid */}
@@ -727,6 +751,39 @@ export default function App() {
           <p>© {new Date().getFullYear()} CamperVentura. {t('footer.copyright')}</p>
         </div>
       </footer>
+
+      {/* Floating Home/Return Button */}
+      {(activeTab !== 'home' || selectedCamper) && (
+        <button
+          onClick={() => {
+            setActiveTab('home');
+            setSelectedCamper(null);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="glass floating-home-btn"
+          style={{
+            position: 'fixed',
+            bottom: '2rem',
+            right: '2rem',
+            width: '52px',
+            height: '52px',
+            borderRadius: '50%',
+            background: 'var(--accent-orange)',
+            border: '1px solid var(--accent-orange)',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 8px 32px 0 rgba(255, 107, 53, 0.35)',
+            zIndex: 999,
+            outline: 'none'
+          }}
+          title={language === 'es' ? 'Volver al Inicio' : 'Return to Home'}
+        >
+          <Home size={22} />
+        </button>
+      )}
     </>
   );
 }
