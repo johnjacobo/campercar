@@ -146,15 +146,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
           {/* Header Actions */}
           <div className="flex align-center" style={{ gap: '1rem' }}>
             
-            {/* Desktop-only: "Alquila tu Camper" CTA */}
-            <button 
-              className="btn btn-primary desktop-only-btn" 
-              style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem', display: activeTab === 'partner' ? 'none' : 'block' }}
-              onClick={() => { setActiveTab('partner'); window.scrollTo(0, 0); }}
-            >
-              {t('navbar.cta_rent')}
-            </button>
-            
+
             {/* Profile Avatar (Visible on both desktop & mobile) */}
             <div className="detail-host-avatar" style={{ cursor: 'pointer', width: '36px', height: '36px' }} title="Mi Perfil">
               <User size={18} />
