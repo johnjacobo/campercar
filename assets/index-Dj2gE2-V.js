@@ -271,7 +271,7 @@ Error generating stack: `+l.message+`
           .navbar.scrolled {
             height: 60px !important;
           }
-          .navbar.scrolled img {
+          .navbar.scrolled .logo-container img {
             height: 46px !important;
           }
         }
