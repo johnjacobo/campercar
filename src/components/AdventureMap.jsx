@@ -126,7 +126,7 @@ const spots = [
     id: 'corralejo',
     category: 'adventure',
     name: 'Dunas de Corralejo',
-    image: 'images/camper_beach.png',
+    image: 'images/corralejo_dunes.png',
     type: {
       es: 'Surf y Paisaje Lunático',
       en: 'Surf & Lunar Landscape',
@@ -155,7 +155,7 @@ const spots = [
     id: 'el-cotillo',
     category: 'adventure',
     name: 'Lagos de El Cotillo',
-    image: 'images/camper_beach.png',
+    image: 'images/lagos_cotillo.png',
     type: {
       es: 'Atardeceres y Snorkel',
       en: 'Sunsets & Snorkeling',
@@ -184,7 +184,7 @@ const spots = [
     id: 'betancuria',
     category: 'adventure',
     name: 'Valle de Betancuria',
-    image: 'images/camper_volcano.png',
+    image: 'images/valle_betancuria.png',
     type: {
       es: 'Historia y Senderismo',
       en: 'History & Hiking',
@@ -213,7 +213,7 @@ const spots = [
     id: 'cofete',
     category: 'adventure',
     name: 'Playa Salvaje de Cofete',
-    image: 'images/camper_volcano.png',
+    image: 'images/playa_cofete.png',
     type: {
       es: 'Aventura Extrema 4x4',
       en: '4x4 Extreme Adventure',
@@ -242,7 +242,7 @@ const spots = [
     id: 'sotavento',
     category: 'adventure',
     name: 'Laguna de Sotavento',
-    image: 'images/epic_beach.png',
+    image: 'images/laguna_sotavento.png',
     type: {
       es: 'Viento y Playas Infinitas',
       en: 'Wind & Endless Beaches',
