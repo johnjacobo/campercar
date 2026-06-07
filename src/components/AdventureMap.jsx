@@ -365,7 +365,7 @@ const spots = [
   {
     id: 'disa-mercasosa',
     category: 'service',
-    name: 'DISA Nueva Mercasosa',
+    name: 'DISA Carretera de La Oliva',
     image: 'images/service_disa_mercasosa.png',
     type: {
       es: 'Estación de Servicio y Vaciado',
