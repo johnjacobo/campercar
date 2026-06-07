@@ -106,7 +106,10 @@ export default function Navbar({ activeTab, setActiveTab }) {
         }
       `}</style>
 
-      <nav className={`navbar ${isScrolled ? 'scrolled' : ''} glass`}>
+      <nav 
+        className={`navbar ${isScrolled ? 'scrolled' : ''} glass`}
+        onMouseLeave={() => setIsMobileMenuOpen(false)}
+      >
         <div className="container flex align-center justify-between">
           {/* Logo */}
           <a href="#home" className="logo-container" onClick={(e) => { e.preventDefault(); setActiveTab('home'); }} style={{ padding: 0 }}>
@@ -158,7 +161,11 @@ export default function Navbar({ activeTab, setActiveTab }) {
             </div>
 
             {/* Custom Language Selector Dropdown (Visible on both desktop & mobile) */}
-            <div className="lang-selector-wrapper" style={{ position: 'relative' }}>
+            <div 
+              className="lang-selector-wrapper" 
+              style={{ position: 'relative' }}
+              onMouseLeave={() => setIsLangMenuOpen(false)}
+            >
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)} 
                 className="lang-trigger-btn glass"
