@@ -577,8 +577,14 @@ export default function AdventureMap() {
     <>
       <style>{`
         @media (max-width: 768px) {
+          .spot-info-card {
+            flex-direction: column !important;
+            gap: 1rem !important;
+          }
           .popup-image-container {
-            display: none !important;
+            width: 100% !important;
+            height: 180px !important;
+            display: block !important;
           }
         }
       `}</style>
@@ -744,7 +750,7 @@ export default function AdventureMap() {
           {/* Tarjeta de Información Estática Abajo (nunca obstruye los puntos del mapa) */}
           {activeSpot && (
             <div 
-              className="glass animate-fade-in" 
+              className="spot-info-card glass animate-fade-in" 
               style={{ 
                 background: 'rgba(22, 24, 31, 0.96)', 
                 border: '1px solid var(--border-color)',
