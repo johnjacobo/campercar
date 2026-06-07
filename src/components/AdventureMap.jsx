@@ -267,6 +267,99 @@ const spots = [
     },
     difficulty: 'diff_easy'
   },
+  {
+    id: 'aguas-verdes',
+    category: 'adventure',
+    name: 'Charcos de Aguas Verdes',
+    image: 'images/pool_aguas_verdes.png',
+    type: {
+      es: 'Piscinas de Roca Volcánica y Mar Salvaje',
+      en: 'Volcanic Rock Pools & Wild Sea',
+      de: 'Vulkangestein-Pools & Wildes Meer',
+      fr: 'Piscines de Roche Volcanique & Mer Sauvage',
+      it: 'Piscine di Roccia Vulcanica & Mare Selvaggio'
+    },
+    coordinates: { x: 200, y: 220 },
+    geoCoordinates: { lat: 28.4550, lng: -14.0945 },
+    description: {
+      es: 'Un paraíso de charcos vírgenes esculpidos en piedra volcánica en la costa oeste. Ideales para relajarse y observar la vida marina durante la marea baja. Se recomienda llevar calzado escarpín y precaución con el oleaje exterior.',
+      en: 'A paradise of pristine pools carved into volcanic stone on the west coast. Ideal for relaxing and watching marine life during low tide. Reef shoes and caution with external waves are highly recommended.',
+      de: 'Ein Paradies aus unberührten, in Vulkangestein gehauenen Becken an der Westküste. Ideal zum Entspannen und Beobachten des Meereslebens bei Ebbe. Badeschuhe und Vorsicht vor äußeren Wellen werden dringend empfohlen.',
+      fr: 'Un paradis de vasques sauvages sculptées dans la roche volcanique sur la côte ouest. Idéal pour se détendre et observer la vie marine à marée basse. Chaussures d\'eau et prudence face aux vagues recommandées.',
+      it: 'Un paradiso di piscine naturali incontaminate scavate nella pietra vulcanica sulla costa occidentale. Ideale per rilassarsi e observar la vita marina durante la bassa marea. Si consigliano scarpette da scoglio e cautela con le onde esterne.'
+    },
+    activity: {
+      es: 'Charcos, Senderismo, Relax',
+      en: 'Tide Pools, Hiking, Relax',
+      de: 'Gezeitenbecken, Wandern, Relax',
+      fr: 'Piscines de Marée, Randonnée, Détente',
+      it: 'Piscine Naturali, Trekking, Relax'
+    },
+    difficulty: 'diff_medium',
+    address: 'Playa del Valle, Betancuria'
+  },
+  {
+    id: 'puertito-lobos',
+    category: 'adventure',
+    name: 'Lagunas de Puertito de Lobos',
+    image: 'images/pool_puertito_lobos.png',
+    type: {
+      es: 'Lagunas Turquesas e Islote Virgen',
+      en: 'Turquoise Lagoons & Pristine Islet',
+      de: 'Türkisfarbene Lagunen & Unberührte Insel',
+      fr: 'Lagons Turquoise & Îlot Sauvage',
+      it: 'Lagune Turchesi & Isolotto Incontaminato'
+    },
+    coordinates: { x: 385, y: 75 },
+    geoCoordinates: { lat: 28.7490, lng: -13.8220 },
+    description: {
+      es: 'Piscinas naturales de aguas turquesas y transparentes y poca profundidad, ideales para hacer snorkel. Situadas en el islote de Lobos, accesible en taxi-barco desde Corralejo. Un ecosistema único protegido.',
+      en: 'Natural pools of shallow, crystal-clear turquoise waters, perfect for snorkeling. Located on Lobos Islet, accessible by water taxi from Corralejo. A protected and unique ecosystem.',
+      de: 'Natürliche Becken mit flachem, kristallklarem, türkisfarbenem Wasser, perfekt zum Schnorcheln. Auf der Insel Lobos, erreichbar mit dem Wassertaxi von Corralejo. Ein geschütztes und einzigartiges Ökosystem.',
+      fr: 'Piscines naturelles d\'eaux turquoise peu profondes et cristallines, parfaites pour le snorkeling. Situées sur l\'îlot de Lobos, accessible en bateau-taxi depuis Corralejo. Un écosystème protégé unique.',
+      it: 'Piscine naturali di acque turchesi poco profonde e cristalline, perfette per lo snorkeling. Situate sull\'isolotto di Lobos, raggiungibile in water taxi da Corralejo. Un ecosistema unico e protetto.'
+    },
+    activity: {
+      es: 'Snorkel, Kayak, Islote',
+      en: 'Snorkeling, Kayak, Islet Tour',
+      de: 'Schnorcheln, Kajak, Inseltour',
+      fr: 'Snorkeling, Kayak, Visite d\'Îlot',
+      it: 'Snorkeling, Kayak, Tour dell\'Isolotto'
+    },
+    difficulty: 'diff_easy',
+    address: 'Islote de Lobos, Corralejo'
+  },
+  {
+    id: 'charcos-cotillo',
+    category: 'adventure',
+    name: 'Charcos de El Cotillo',
+    image: 'images/pool_charcos_cotillo.png',
+    type: {
+      es: 'Calas de Arena Blanca y Arrecife',
+      en: 'White Sand Coves & Reef Barrier',
+      de: 'Weiße Sandbuchten & Riffbarriere',
+      fr: 'Criques de Sable Blanc & Récif',
+      it: 'Calette di Sabbia Bianca & Barriera'
+    },
+    coordinates: { x: 210, y: 90 },
+    geoCoordinates: { lat: 28.7125, lng: -14.0145 },
+    description: {
+      es: 'Conjunto de lagunas de aguas calmas formadas por un arrecife natural de basalto negro, con arena blanca y fina. Es muy seguro para familias y niños pequeños. Situado junto al emblemático Faro del Tostón.',
+      en: 'A series of calm lagoons formed by a natural black basalt reef, featuring fine white sand. Very safe for families and young children. Located next to the iconic Tostón Lighthouse.',
+      de: 'Eine Reihe von ruhigen Lagunen, die durch ein natürliches schwarzes Basaltriff gebildet werden, mit feinem weißen Sand. Sehr sicher für Familien und kleine Kinder. Neben dem berühmten Tostón-Leuchtturm.',
+      fr: 'Une série de lagunes calmes formées par un récif naturel de basalte noir, con du sable blanc très fin. Très sûr pour les familles et les jeunes enfants. Situé à côté de l\'emblématique phare de Tostón.',
+      it: 'Una serie di lagune calme formate da una barriera naturale di basalto nero, con sabbia bianca e finissima. Molto sicuro per famiglie e bambini piccoli. Situato vicino all\'iconico Faro del Tostón.'
+    },
+    activity: {
+      es: 'Familiar, Faro, Baño Seguro',
+      en: 'Family-Friendly, Lighthouse, Safe Swim',
+      de: 'Familienfreundlich, Leuchtturm, Sicheres Baden',
+      fr: 'Familial, Phare, Baignade Sûre',
+      it: 'Ideale per Famiglie, Faro, Bagno Sicuro'
+    },
+    difficulty: 'diff_easy',
+    address: 'Faro del Tostón, El Cotillo'
+  },
 
   // Puntos Limpios / Servicios
   {
