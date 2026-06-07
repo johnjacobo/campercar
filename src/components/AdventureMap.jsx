@@ -588,6 +588,15 @@ export default function AdventureMap() {
           .desktop-only-info-card {
             display: none !important;
           }
+          .adventure-layout {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 2rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+          }
           .category-tabs-container {
             flex-direction: column !important;
             width: 100%;
@@ -600,8 +609,18 @@ export default function AdventureMap() {
             font-size: 0.82rem !important;
             padding: 0.65rem 1rem !important;
           }
+          .spots-list {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+          }
           .spot-item {
             padding: 1rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
           }
           .spot-item-expanded-inline {
             display: flex !important;
@@ -610,10 +629,36 @@ export default function AdventureMap() {
             margin-top: 1rem;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 0.85rem;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
+          }
+          .spot-item-expanded-inline p {
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
           }
           /* Prevent slide translate on mobile to fit accordion nicely */
           .spot-item.active {
             transform: none !important;
+          }
+          .spot-title-row {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.25rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+          .spot-title-row h4 {
+            font-size: 1.05rem !important;
+            word-break: break-word !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            margin: 0 !important;
+          }
+          .spot-tag {
+            font-size: 0.72rem !important;
+            margin: 0 !important;
           }
         }
       `}</style>
@@ -664,7 +709,7 @@ export default function AdventureMap() {
           </div>
 
           {/* Lista Filtrada */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '380px', overflowY: 'auto', padding: '0 0.25rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '380px', overflowY: 'auto', padding: '0 0.25rem', width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
             {filteredSpots.map((spot) => (
               <div
                 key={spot.id}
@@ -721,8 +766,8 @@ export default function AdventureMap() {
                     <p style={{ fontSize: '0.82rem', lineHeight: '1.4', color: 'var(--text-secondary)', margin: '0 0 0.75rem' }}>
                       {getLocalized(spot.description)}
                     </p>
-                    <div className="flex align-center justify-between" style={{ gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.65rem' }}>
-                      <div className="flex align-center" style={{ gap: '0.25rem', color: 'var(--text-muted)', maxWidth: '100%', overflow: 'hidden' }}>
+                    <div className="flex align-center justify-between" style={{ gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.65rem', width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
+                      <div className="flex align-center" style={{ gap: '0.25rem', color: 'var(--text-muted)', maxWidth: '100%', overflow: 'hidden', minWidth: 0, flex: 1 }}>
                         {spot.category === 'regulations' ? <Shield size={12} style={{ flexShrink: 0, color: 'var(--accent-gold)' }} /> : <MapPin size={12} style={{ flexShrink: 0, color: 'var(--accent-orange)' }} />}
                         <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
                           {spot.address || `${t('footer.address').split(',')[0]}, Canarias`}
