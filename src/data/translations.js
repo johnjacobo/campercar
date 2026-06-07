@@ -155,7 +155,7 @@ export const translations = {
       spots_list_title: "Puntos Destacados",
       tab_all: "Todos",
       tab_adventure: "Aventura y Naturaleza",
-      tab_services: "Servicios y Vaciado",
+      tab_services: "Puntos Limpios",
       btn_directions: "Abrir en Google Maps"
     },
     footer: {
@@ -326,7 +326,7 @@ export const translations = {
       spots_list_title: "Highlighted Spots",
       tab_all: "All",
       tab_adventure: "Adventure & Nature",
-      tab_services: "Services & Disposal",
+      tab_services: "Camper Waste Stations",
       btn_directions: "Open in Google Maps"
     },
     footer: {
@@ -497,7 +497,7 @@ export const translations = {
       spots_list_title: "Highlights",
       tab_all: "Alle",
       tab_adventure: "Abenteuer & Natur",
-      tab_services: "Service & Entsorgung",
+      tab_services: "Entsorgungsstellen",
       btn_directions: "In Google Maps öffnen"
     },
     footer: {
@@ -668,7 +668,7 @@ export const translations = {
       spots_list_title: "Points Clés",
       tab_all: "Tous",
       tab_adventure: "Aventure & Nature",
-      tab_services: "Services & Vidange",
+      tab_services: "Points Propres",
       btn_directions: "Ouvrir sur Google Maps"
     },
     footer: {
@@ -839,7 +839,7 @@ export const translations = {
       spots_list_title: "Punti in Evidenza",
       tab_all: "Tutti",
       tab_adventure: "Avventura & Natura",
-      tab_services: "Servizi & Scarico",
+      tab_services: "Punti di Scarico",
       btn_directions: "Apri in Google Maps"
     },
     footer: {

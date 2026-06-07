@@ -7,6 +7,7 @@ const spots = [
     id: 'corralejo',
     category: 'adventure',
     name: 'Dunas de Corralejo',
+    image: 'images/camper_beach.png',
     type: {
       es: 'Surf y Paisaje Lunático',
       en: 'Surf & Lunar Landscape',
@@ -35,6 +36,7 @@ const spots = [
     id: 'el-cotillo',
     category: 'adventure',
     name: 'Lagos de El Cotillo',
+    image: 'images/camper_beach.png',
     type: {
       es: 'Atardeceres y Snorkel',
       en: 'Sunsets & Snorkeling',
@@ -63,6 +65,7 @@ const spots = [
     id: 'betancuria',
     category: 'adventure',
     name: 'Valle de Betancuria',
+    image: 'images/camper_volcano.png',
     type: {
       es: 'Historia y Senderismo',
       en: 'History & Hiking',
@@ -76,7 +79,7 @@ const spots = [
       en: 'Nestled in a mountainous massif of ancient volcanic origin. A green and rocky contrast in the heart of Fuerteventura with certified Starlight night skies.',
       de: 'Eingebettet in ein Gebirgsmassiv alten vulkanischen Ursprungs. Ein grüner und felsiger Kontrast im Herzen von Fuerteventura mit zertifiziertem Starlight-Nachthimmel.',
       fr: 'Niché dans un massif montagneux d\'ancienne origine volcanique. Un contraste vert et rocheux au cœur de Fuerteventura avec un ciel nocturne certifié Starlight.',
-      it: 'Immerso in un massiccio montuoso di antica origine varia. Un contrasto verde e roccioso nel cuore di Fuerteventura con cieli notturni certificati Starlight.'
+      it: 'Immerso in un massiccio montuoso di antica origine vulcanica. Un contrasto verde e roccioso nel cuore di Fuerteventura con cieli notturni certificati Starlight.'
     },
     activity: {
       es: 'Astronomía, Senderismo, Cultura',
@@ -91,6 +94,7 @@ const spots = [
     id: 'cofete',
     category: 'adventure',
     name: 'Playa Salvaje de Cofete',
+    image: 'images/camper_volcano.png',
     type: {
       es: 'Aventura Extrema 4x4',
       en: '4x4 Extreme Adventure',
@@ -103,7 +107,7 @@ const spots = [
       es: 'La joya salvaje de la isla. 12 km de playa virgen custodiada por montañas de más de 800m. Acceso por pista de tierra de aventura. Pernoctar aquí en camper es una experiencia mística.',
       en: 'The wild jewel of the island. 12 km of pristine beach guarded by mountains over 800m. Access by dirt track adventure. Spending the night here in a camper is a mystical experience.',
       de: 'Das wilde Juwel der Insel. 12 km unberührter Strand, bewacht von über 800 m hohen Bergen. Zufahrt über eine abenteuerliche Schotterpiste. Die Nacht hier im Camper zu verbringen, ist eine mystische Erfahrung.',
-      fr: "Le joyau sauvage de l'île. 12 km de plage vierge gardée par des montagnes de plus de 800m. Accès par piste de terre d'aventure. Passer la nuit ici en camper est une expérience mystique.",
+      fr: "Le joyau sauvage de l'île. 12 km de plage vierge gardée par des montagnes de plus de 800m. Accès par piste de terre d'aventure. Passer la nuit ici en camper es une expérience mystique.",
       it: "Il gioiello selvaggio dell'isola. 12 km di spiaggia incontaminata custodita da montagne di oltre 800m. Accesso da pista sterrata d'avventura. Pernottare qui in camper è un'esperienza mistica."
     },
     activity: {
@@ -119,6 +123,7 @@ const spots = [
     id: 'sotavento',
     category: 'adventure',
     name: 'Laguna de Sotavento',
+    image: 'images/epic_beach.png',
     type: {
       es: 'Viento y Playas Infinitas',
       en: 'Wind & Endless Beaches',
@@ -132,7 +137,7 @@ const spots = [
       en: 'A huge sand barrier creates a 4km long natural tidal lagoon. The world epicenter of Windsurfing and ideal for resting while feeling the breeze.',
       de: 'Eine riesige Sandbarriere bildet eine 4 km lange natürliche Gezeitenlagune. Das weltweite Epizentrum des Windsurfens und ideal zum Ausruhen, während man die Brise spürt.',
       fr: "Une immense barrière de sable crée une lagune de marée naturelle de 4 km de long. L'épicentre mondial de la planche à voile et idéal pour se reposer en sentant la brise.",
-      it: "Una enorme barriera di sabbia crea una laguna di marea naturale lunga 4 km. L'epicentro mondial de Windsurf e ideale per riposare sentendo la brezza."
+      it: "Una enorme barriera di sabbia crea una laguna di marea naturale lunga 4 km. L'epicentro mondiale del Windsurf e ideale per riposare sentendo la brezza."
     },
     activity: {
       es: 'Windsurf, Yoga, Relax',
@@ -143,11 +148,12 @@ const spots = [
     },
     difficulty: 'diff_easy'
   },
-  // Puntos de Servicio y Vaciado
+  // Puntos Limpios / Servicios
   {
     id: 'disa-mercasosa',
     category: 'service',
     name: 'DISA Nueva Mercasosa',
+    image: 'images/service_disa_mercasosa.png',
     type: {
       es: 'Estación de Servicio y Vaciado',
       en: 'Service & Disposal Station',
@@ -177,6 +183,7 @@ const spots = [
     id: 'disa-matorral',
     category: 'service',
     name: 'DISA El Matorral',
+    image: 'images/service_disa_matorral.png',
     type: {
       es: 'Punto de Vaciado Ecológico',
       en: 'Eco-Disposal Point',
@@ -206,6 +213,7 @@ const spots = [
     id: 'punto-cotillo',
     category: 'service',
     name: 'Punto Amigo Cotillo',
+    image: 'images/service_punto_cotillo.png',
     type: {
       es: 'Área de Servicios Privada',
       en: 'Private Service Area',
@@ -235,6 +243,7 @@ const spots = [
     id: 'area-antigua',
     category: 'service',
     name: 'Área Ecológica Antigua',
+    image: 'images/service_area_antigua.png',
     type: {
       es: 'Área Ecológica de Servicios',
       en: 'Eco Service Station',
@@ -250,7 +259,7 @@ const spots = [
       en: 'Excellent free eco-station promoted locally. Allows a full water exchange (gray and black water disposal, plus fresh water intake). Easily accessible from the main FV-2 highway.',
       de: 'Hervorragende, lokal geförderte kostenlose Öko-Entsorgungsstelle. Ermöglicht kompletten Wasserwechsel (Entsorgung von Grau- und Schwarzwasser, Frischwasseranschluss). Einfacher Zugang von der FV-2.',
       fr: 'Excellente station écologique gratuite promue localement. Permet un changement d\'eau complet (vidange des eaux grises, noires et prise d\'eau propre). Facilement accessible depuis la FV-2.',
-      it: 'Eccellente punto ecologico gratuito promosso a livello locale. Consente il cambio completo delle acque (scarico acque grigie, nere e allacciamento acqua pulita). Facilmente accessibile dalla FV-2.'
+      it: 'Eccellente punto ecologico gratuito promosso a livello locale. Consente il cambio completo delle acque (scarico acque grigie, nere e allacciamento agua pulita). Facilmente accessibile dalla FV-2.'
     },
     activity: {
       es: 'Aguas Completas, Gratis, Acceso FV-2',
@@ -264,6 +273,7 @@ const spots = [
     id: 'punto-tarajalejo',
     category: 'service',
     name: 'Punto Tarajalejo',
+    image: 'images/service_punto_tarajalejo.png',
     type: {
       es: 'Área de Autocaravanas Municipal',
       en: 'Municipal Motorhome Area',
@@ -293,6 +303,7 @@ const spots = [
     id: 'bp-corralejo',
     category: 'service',
     name: 'BP Corralejo',
+    image: 'images/service_bp_corralejo.png',
     type: {
       es: 'Gasolinera con Servicios Camper',
       en: 'Petrol Station with Camper Services',
@@ -308,7 +319,7 @@ const spots = [
       en: 'Located in the tourist hub of Corralejo. Features free gray and black water disposal services. Fresh water refill is available using paid tokens.',
       de: 'Liegt im Tourismuszentrum von Corralejo. Bietet kostenlose Grauwasser- und Schwarzwasserentsorgung. Frischwasserbefüllung ist gegen Wertmarken möglich.',
       fr: 'Située dans le centre touristique de Corralejo. Propose des services de vidange d\'eaux grises et noires gratuits. Remplissage d\'eau propre disponible via jetons payants.',
-      it: 'Situata nel centro turistico di Corralejo. Dispone di servizi per lo scarico di acque grigie e nere gratuiti. Il rifornimento di acqua pulita è a pagamento tramite gettoni.'
+      it: 'Situata nel centro turistico di Corralejo. Dispone di servizi per lo scarico di acque grigie e nere gratuiti. Il rifornimento di agua pulita è a pagamento tramite gettoni.'
     },
     activity: {
       es: 'Vaciado Gratis, Corralejo, Gasolinera',
@@ -350,209 +361,253 @@ export default function AdventureMap() {
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeSpot.name + ', Fuerteventura')}`;
 
   return (
-    <div className="adventure-layout">
-      {/* Barra Lateral con Pestañas y Lista */}
-      <div className="spots-list">
-        <h4 style={{ marginBottom: '0.85rem', padding: '0 0.5rem', color: 'var(--accent-gold)' }}>
-          {t('map.spots_list_title')}
-        </h4>
-        
-        {/* Pestañas de Categoría */}
-        <div className="flex" style={{ gap: '0.35rem', marginBottom: '1.25rem', padding: '0 0.5rem', flexWrap: 'wrap' }}>
-          {['all', 'adventure', 'service'].map((cat) => (
-            <button
-              key={cat}
-              onClick={() => handleCategoryChange(cat)}
-              className="glass"
-              style={{
-                padding: '0.45rem 0.8rem',
-                borderRadius: '8px',
-                fontSize: '0.75rem',
-                fontWeight: '700',
-                cursor: 'pointer',
-                background: activeCategory === cat ? 'var(--accent-orange)' : 'rgba(255, 255, 255, 0.05)',
-                color: activeCategory === cat ? 'white' : 'var(--text-secondary)',
-                border: activeCategory === cat ? '1px solid var(--accent-orange)' : '1px solid var(--border-color)',
-                transition: 'all var(--transition-fast)',
-                outline: 'none'
-              }}
-            >
-              {t(`map.tab_${cat}`)}
-            </button>
-          ))}
-        </div>
-
-        {/* Lista Filtrada */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '380px', overflowY: 'auto', padding: '0 0.25rem' }}>
-          {filteredSpots.map((spot) => (
-            <div
-              key={spot.id}
-              className={`spot-item ${activeSpot.id === spot.id ? 'active' : ''}`}
-              onClick={() => setActiveSpot(spot)}
-              style={{
-                borderLeft: activeSpot.id === spot.id 
-                  ? `4px solid ${spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'}` 
-                  : '1px solid var(--border-color)'
-              }}
-            >
-              <div className="spot-title-row">
-                <h4>{spot.name}</h4>
-                <span 
-                  className="spot-tag"
-                  style={{
-                    color: spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-gold)'
-                  }}
-                >
-                  {getLocalized(spot.activity).split(',')[0]}
-                </span>
-              </div>
-              <p style={{ fontSize: '0.9rem', color: activeSpot.id === spot.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
-                {getLocalized(spot.type)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Contenedor del Mapa SVG */}
-      <div className="map-container glass">
-        <svg viewBox="0 0 500 500" className="map-svg">
-          {/* Cuadrícula estética de fondo */}
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.015)" strokeWidth="1" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+    <>
+      <style>{`
+        @media (max-width: 768px) {
+          .popup-image-container {
+            display: none !important;
+          }
+        }
+      `}</style>
+      
+      <div className="adventure-layout">
+        {/* Barra Lateral con Pestañas y Lista */}
+        <div className="spots-list">
+          <h4 style={{ marginBottom: '0.85rem', padding: '0 0.5rem', color: 'var(--accent-gold)' }}>
+            {t('map.spots_list_title')}
+          </h4>
           
-          {/* Silueta vectorial de Fuerteventura */}
-          <path
-            className="island-path"
-            d="M 230 100 
-               C 270 80, 310 70, 360 80 
-               C 380 90, 390 110, 370 130
-               C 340 160, 300 200, 290 230
-               C 280 250, 290 280, 270 310
-               C 250 330, 220 340, 200 360
-               C 180 370, 190 395, 170 410
-               C 140 430, 100 440, 70 430
-               C 50 420, 60 395, 90 380
-               C 110 370, 130 360, 150 350
-               C 180 330, 185 300, 190 280
-               C 200 250, 210 200, 205 170
-               C 200 140, 215 115, 230 100 Z"
-          />
-
-          {/* Marcadores Interactivos */}
-          {filteredSpots.map((spot) => (
-            <g
-              key={spot.id}
-              className={`map-marker ${activeSpot.id === spot.id ? 'active' : ''}`}
-              transform={`translate(${spot.coordinates.x}, ${spot.coordinates.y})`}
-              onClick={() => setActiveSpot(spot)}
-            >
-              {/* Círculos dinámicos con color según categoría */}
-              <circle 
-                r={activeSpot.id === spot.id ? 9 : 6.5} 
-                style={{ 
-                  fill: activeSpot.id === spot.id 
-                    ? 'var(--accent-gold)' 
-                    : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'),
-                  stroke: 'white',
-                  strokeWidth: 2,
-                  transition: 'all var(--transition-fast)'
-                }} 
-              />
-              <circle 
-                r="13" 
-                fill="none" 
-                stroke={spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'} 
-                strokeWidth="1.5" 
-                style={{ 
-                  opacity: activeSpot.id === spot.id ? 1 : 0,
-                  transition: 'all var(--transition-fast)'
-                }} 
-              />
-              <text y="-18" style={{ fontSize: '10px', fill: 'white', fontWeight: '700' }}>
-                {spot.name.split(' ')[0]}
-              </text>
-            </g>
-          ))}
-        </svg>
-
-        {/* Ventana flotante de Información del punto activo */}
-        {activeSpot && (
-          <div className="map-info-popup glass animate-fade-in" style={{ background: 'rgba(22, 24, 31, 0.95)', border: '1px solid var(--border-color)' }}>
-            <div className="flex align-center gap-2" style={{ gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
-              {activeSpot.category === 'service' ? (
-                <>
-                  <Droplet size={14} style={{ color: 'var(--accent-teal)' }} />
-                  <span className="badge badge-blue" style={{ fontSize: '0.72rem', textTransform: 'none', background: 'rgba(0, 168, 150, 0.15)', color: 'var(--accent-teal)', border: '1px solid rgba(0, 168, 150, 0.3)' }}>
-                    {t('map.tab_services')}
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Compass size={14} className="animate-spin-slow" style={{ color: 'var(--accent-orange)' }} />
-                  <span className="badge badge-adventure" style={{ fontSize: '0.72rem' }}>
-                    {getLocalized(activeSpot.activity).split(',')[0]}
-                  </span>
-                  <span className="badge badge-gold" style={{ fontSize: '0.72rem' }}>
-                    {t('map.difficulty')}: {t(`map.${activeSpot.difficulty}`)}
-                  </span>
-                </>
-              )}
-            </div>
-            
-            <h4 style={{ fontSize: '1.1rem', fontWeight: '700', color: 'white', marginBottom: '0.25rem' }}>
-              {activeSpot.name}
-            </h4>
-            
-            <p style={{ fontSize: '0.88rem', lineHeight: '1.45', margin: '0.25rem 0 0.85rem', color: 'var(--text-secondary)' }}>
-              {getLocalized(activeSpot.description)}
-            </p>
-            
-            {/* Fila inferior: Dirección y Botón de Google Maps */}
-            <div className="flex align-center justify-between" style={{ marginTop: '0.85rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.85rem', gap: '1rem', flexWrap: 'wrap' }}>
-              <div className="flex align-center" style={{ gap: '0.35rem', fontSize: '0.8rem', color: 'var(--accent-gold)' }}>
-                <MapPin size={13} style={{ flexShrink: 0 }} />
-                <span 
-                  style={{ 
-                    maxWidth: '180px', 
-                    overflow: 'hidden', 
-                    textOverflow: 'ellipsis', 
-                    whiteSpace: 'nowrap',
-                    color: 'var(--text-muted)'
-                  }} 
-                  title={activeSpot.address || `${t('footer.address').split(',')[0]}, Canarias`}
-                >
-                  {activeSpot.address || `${t('footer.address').split(',')[0]}, Canarias`}
-                </span>
-              </div>
-              
-              <a 
-                href={mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
+          {/* Pestañas de Categoría */}
+          <div className="flex" style={{ gap: '0.35rem', marginBottom: '1.25rem', padding: '0 0.5rem', flexWrap: 'wrap' }}>
+            {['all', 'adventure', 'service'].map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleCategoryChange(cat)}
+                className="glass"
                 style={{
-                  padding: '0.45rem 0.85rem',
-                  fontSize: '0.75rem',
+                  padding: '0.45rem 0.8rem',
                   borderRadius: '8px',
-                  gap: '0.4rem',
-                  margin: 0,
-                  boxShadow: 'none',
-                  minHeight: 'auto',
-                  lineHeight: '1'
+                  fontSize: '0.75rem',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  background: activeCategory === cat ? 'var(--accent-orange)' : 'rgba(255, 255, 255, 0.05)',
+                  color: activeCategory === cat ? 'white' : 'var(--text-secondary)',
+                  border: activeCategory === cat ? '1px solid var(--accent-orange)' : '1px solid var(--border-color)',
+                  transition: 'all var(--transition-fast)',
+                  outline: 'none'
                 }}
               >
-                <MapPin size={11} />
-                {t('map.btn_directions')}
-              </a>
-            </div>
+                {t(`map.tab_${cat}`)}
+              </button>
+            ))}
           </div>
-        )}
+
+          {/* Lista Filtrada */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '380px', overflowY: 'auto', padding: '0 0.25rem' }}>
+            {filteredSpots.map((spot) => (
+              <div
+                key={spot.id}
+                className={`spot-item ${activeSpot.id === spot.id ? 'active' : ''}`}
+                onClick={() => setActiveSpot(spot)}
+                style={{
+                  borderLeft: activeSpot.id === spot.id 
+                    ? `4px solid ${spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'}` 
+                    : '1px solid var(--border-color)'
+                }}
+              >
+                <div className="spot-title-row">
+                  <h4>{spot.name}</h4>
+                  <span 
+                    className="spot-tag"
+                    style={{
+                      color: spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-gold)'
+                    }}
+                  >
+                    {getLocalized(spot.activity).split(',')[0]}
+                  </span>
+                </div>
+                <p style={{ fontSize: '0.9rem', color: activeSpot.id === spot.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
+                  {getLocalized(spot.type)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Contenedor del Mapa SVG */}
+        <div className="map-container glass">
+          <svg viewBox="0 0 500 500" className="map-svg">
+            {/* Cuadrícula estética de fondo */}
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.015)" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            
+            {/* Silueta vectorial de Fuerteventura */}
+            <path
+              className="island-path"
+              d="M 230 100 
+                 C 270 80, 310 70, 360 80 
+                 C 380 90, 390 110, 370 130
+                 C 340 160, 300 200, 290 230
+                 C 280 250, 290 280, 270 310
+                 C 250 330, 220 340, 200 360
+                 C 180 370, 190 395, 170 410
+                 C 140 430, 100 440, 70 430
+                 C 50 420, 60 395, 90 380
+                 C 110 370, 130 360, 150 350
+                 C 180 330, 185 300, 190 280
+                 C 200 250, 210 200, 205 170
+                 C 200 140, 215 115, 230 100 Z"
+            />
+
+            {/* Marcadores Interactivos */}
+            {filteredSpots.map((spot) => (
+              <g
+                key={spot.id}
+                className={`map-marker ${activeSpot.id === spot.id ? 'active' : ''}`}
+                transform={`translate(${spot.coordinates.x}, ${spot.coordinates.y})`}
+                onClick={() => setActiveSpot(spot)}
+              >
+                {/* Círculos dinámicos con color según categoría */}
+                <circle 
+                  r={activeSpot.id === spot.id ? 9 : 6.5} 
+                  style={{ 
+                    fill: activeSpot.id === spot.id 
+                    ? 'var(--accent-gold)' 
+                    : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'),
+                    stroke: 'white',
+                    strokeWidth: 2,
+                    transition: 'all var(--transition-fast)'
+                  }} 
+                />
+                <circle 
+                  r="13" 
+                  fill="none" 
+                  stroke={spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'} 
+                  strokeWidth="1.5" 
+                  style={{ 
+                    opacity: activeSpot.id === spot.id ? 1 : 0,
+                    transition: 'all var(--transition-fast)'
+                  }} 
+                />
+                <text y="-18" style={{ fontSize: '10px', fill: 'white', fontWeight: '700' }}>
+                  {spot.name.split(' ')[0]}
+                </text>
+              </g>
+            ))}
+          </svg>
+
+          {/* Ventana flotante de Información del punto activo */}
+          {activeSpot && (
+            <div 
+              className="map-info-popup glass animate-fade-in" 
+              style={{ 
+                background: 'rgba(22, 24, 31, 0.96)', 
+                border: '1px solid var(--border-color)',
+                display: 'flex',
+                gap: '1.25rem',
+                padding: '1.25rem',
+                zIndex: 10
+              }}
+            >
+              {/* Imagen en Desktop */}
+              <div 
+                className="popup-image-container"
+                style={{ 
+                  width: '140px', 
+                  height: '115px',
+                  flexShrink: 0, 
+                  borderRadius: '10px', 
+                  overflow: 'hidden', 
+                  background: 'var(--bg-tertiary)'
+                }}
+              >
+                <img 
+                  src={import.meta.env.BASE_URL + activeSpot.image} 
+                  alt={activeSpot.name} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                />
+              </div>
+
+              {/* Información textual */}
+              <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div className="flex align-center gap-2" style={{ gap: '0.5rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
+                    {activeSpot.category === 'service' ? (
+                      <>
+                        <Droplet size={14} style={{ color: 'var(--accent-teal)' }} />
+                        <span className="badge badge-blue" style={{ fontSize: '0.72rem', textTransform: 'none', background: 'rgba(0, 168, 150, 0.15)', color: 'var(--accent-teal)', border: '1px solid rgba(0, 168, 150, 0.3)' }}>
+                          {t('map.tab_services')}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <Compass size={14} className="animate-spin-slow" style={{ color: 'var(--accent-orange)' }} />
+                        <span className="badge badge-adventure" style={{ fontSize: '0.72rem' }}>
+                          {getLocalized(activeSpot.activity).split(',')[0]}
+                        </span>
+                        <span className="badge badge-gold" style={{ fontSize: '0.72rem' }}>
+                          {t('map.difficulty')}: {t(`map.${activeSpot.difficulty}`)}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                  
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: '700', color: 'white', marginBottom: '0.25rem' }}>
+                    {activeSpot.name}
+                  </h4>
+                  
+                  <p style={{ fontSize: '0.88rem', lineHeight: '1.45', margin: '0.25rem 0 0.85rem', color: 'var(--text-secondary)' }}>
+                    {getLocalized(activeSpot.description)}
+                  </p>
+                </div>
+                
+                {/* Fila inferior: Dirección y Botón de Google Maps */}
+                <div className="flex align-center justify-between" style={{ marginTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.65rem', gap: '1rem', flexWrap: 'wrap' }}>
+                  <div className="flex align-center" style={{ gap: '0.35rem', fontSize: '0.8rem', color: 'var(--accent-gold)' }}>
+                    <MapPin size={13} style={{ flexShrink: 0 }} />
+                    <span 
+                      style={{ 
+                        maxWidth: '180px', 
+                        overflow: 'hidden', 
+                        textOverflow: 'ellipsis', 
+                        whiteSpace: 'nowrap',
+                        color: 'var(--text-muted)'
+                      }} 
+                      title={activeSpot.address || `${t('footer.address').split(',')[0]}, Canarias`}
+                    >
+                      {activeSpot.address || `${t('footer.address').split(',')[0]}, Canarias`}
+                    </span>
+                  </div>
+                  
+                  <a 
+                    href={mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                    style={{
+                      padding: '0.45rem 0.85rem',
+                      fontSize: '0.75rem',
+                      borderRadius: '8px',
+                      gap: '0.4rem',
+                      margin: 0,
+                      boxShadow: 'none',
+                      minHeight: 'auto',
+                      lineHeight: '1'
+                    }}
+                  >
+                    <MapPin size={11} />
+                    {t('map.btn_directions')}
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
