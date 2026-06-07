@@ -152,7 +152,11 @@ export const translations = {
       diff_medium: "Media",
       diff_hard: "Difícil (Pista de tierra)",
       activity_tag: "Actividad",
-      spots_list_title: "Puntos Destacados"
+      spots_list_title: "Puntos Destacados",
+      tab_all: "Todos",
+      tab_adventure: "Aventura y Naturaleza",
+      tab_services: "Servicios y Vaciado",
+      btn_directions: "Abrir en Google Maps"
     },
     footer: {
       desc: "No es un paseo más, es tu próxima aventura. Alquila vehículos autónomos de caravaning en Fuerteventura, Canarias.",
@@ -319,7 +323,11 @@ export const translations = {
       diff_medium: "Medium",
       diff_hard: "Difficult (Dirt track)",
       activity_tag: "Activity",
-      spots_list_title: "Highlighted Spots"
+      spots_list_title: "Highlighted Spots",
+      tab_all: "All",
+      tab_adventure: "Adventure & Nature",
+      tab_services: "Services & Disposal",
+      btn_directions: "Open in Google Maps"
     },
     footer: {
       desc: "Not just another ride, it's your next adventure. Rent autonomous caravaning vehicles in Fuerteventura, Canaries.",
@@ -486,7 +494,11 @@ export const translations = {
       diff_medium: "Mittel",
       diff_hard: "Schwer (Schotterpiste)",
       activity_tag: "Aktivität",
-      spots_list_title: "Highlights"
+      spots_list_title: "Highlights",
+      tab_all: "Alle",
+      tab_adventure: "Abenteuer & Natur",
+      tab_services: "Service & Entsorgung",
+      btn_directions: "In Google Maps öffnen"
     },
     footer: {
       desc: "Nicht nur eine Fahrt, sondern dein nächstes Abenteuer. Miete Wohnmobile und Campervans auf Fuerteventura, Kanaren.",
@@ -653,7 +665,11 @@ export const translations = {
       diff_medium: "Moyenne",
       diff_hard: "Difficile (Piste de terre)",
       activity_tag: "Activité",
-      spots_list_title: "Points Clés"
+      spots_list_title: "Points Clés",
+      tab_all: "Tous",
+      tab_adventure: "Aventure & Nature",
+      tab_services: "Services & Vidange",
+      btn_directions: "Ouvrir sur Google Maps"
     },
     footer: {
       desc: "Pas juste une simple balade, c'est votre prochaine aventure. Louez des véhicules autonomes de caravaning à Fuerteventura, Canaries.",
@@ -820,7 +836,11 @@ export const translations = {
       diff_medium: "Media",
       diff_hard: "Difficile (Strada sterrata)",
       activity_tag: "Attività",
-      spots_list_title: "Punti in Evidenza"
+      spots_list_title: "Punti in Evidenza",
+      tab_all: "Tutti",
+      tab_adventure: "Avventura & Natura",
+      tab_services: "Servizi & Scarico",
+      btn_directions: "Apri in Google Maps"
     },
     footer: {
       desc: "Non è solo un giro in più, è la tua prossima avventura. Noleggia camper e autocaravan a Fuerteventura, Canarie.",
