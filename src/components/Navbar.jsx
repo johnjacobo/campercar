@@ -167,7 +167,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
                     right: 0,
                     marginTop: '0.5rem',
                     borderRadius: '10px',
-                    background: 'rgba(22, 24, 31, 0.95)',
+                    background: '#1f222d',
                     border: '1px solid var(--border-color)',
                     minWidth: '160px',
                     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)',
@@ -234,7 +234,9 @@ export default function Navbar({ activeTab, setActiveTab }) {
             flexDirection: 'column',
             padding: '1.5rem',
             gap: '1rem',
+            background: '#13141a',
             borderBottom: '1px solid var(--border-color)',
+            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
             zIndex: 999
           }}>
             {navItems.map((item) => (
