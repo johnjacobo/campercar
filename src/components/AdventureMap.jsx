@@ -576,15 +576,29 @@ export default function AdventureMap() {
   return (
     <>
       <style>{`
-        @media (max-width: 768px) {
-          .spot-info-card {
-            flex-direction: column !important;
-            gap: 1rem !important;
+        /* Desktop styles: hide inline accordion */
+        @media (min-width: 769px) {
+          .spot-item-expanded-inline {
+            display: none !important;
           }
-          .popup-image-container {
-            width: 100% !important;
-            height: 180px !important;
-            display: block !important;
+        }
+        
+        /* Mobile styles: hide bottom card, style inline accordion */
+        @media (max-width: 768px) {
+          .desktop-only-info-card {
+            display: none !important;
+          }
+          .spot-item-expanded-inline {
+            display: flex !important;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 0.85rem;
+          }
+          /* Prevent slide translate on mobile to fit accordion nicely */
+          .spot-item.active {
+            transform: none !important;
           }
         }
       `}</style>
@@ -648,7 +662,8 @@ export default function AdventureMap() {
                           ? 'var(--accent-gold)' 
                           : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)')
                       }` 
-                    : '1px solid var(--border-color)'
+                    : '1px solid var(--border-color)',
+                  cursor: 'pointer'
                 }}
               >
                 <div className="spot-title-row">
@@ -664,9 +679,59 @@ export default function AdventureMap() {
                     {getLocalized(spot.activity).split(',')[0]}
                   </span>
                 </div>
-                <p style={{ fontSize: '0.9rem', color: activeSpot.id === spot.id ? 'var(--text-primary)' : 'var(--text-secondary)' }}>
+                <p style={{ fontSize: '0.9rem', color: activeSpot.id === spot.id ? 'var(--text-primary)' : 'var(--text-secondary)', margin: 0 }}>
                   {getLocalized(spot.type)}
                 </p>
+
+                {/* Inline Accordion for Mobile */}
+                {activeSpot.id === spot.id && (
+                  <div className="spot-item-expanded-inline animate-fade-in">
+                    <div style={{ width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', background: 'var(--bg-tertiary)', marginBottom: '0.5rem' }}>
+                      <img 
+                        src={import.meta.env.BASE_URL + spot.image} 
+                        alt={spot.name} 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                    </div>
+                    <p style={{ fontSize: '0.82rem', lineHeight: '1.4', color: 'var(--text-secondary)', margin: '0 0 0.75rem' }}>
+                      {getLocalized(spot.description)}
+                    </p>
+                    <div className="flex align-center justify-between" style={{ gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.65rem' }}>
+                      <div className="flex align-center" style={{ gap: '0.25rem', color: 'var(--text-muted)', maxWidth: '100%', overflow: 'hidden' }}>
+                        {spot.category === 'regulations' ? <Shield size={12} style={{ flexShrink: 0, color: 'var(--accent-gold)' }} /> : <MapPin size={12} style={{ flexShrink: 0, color: 'var(--accent-orange)' }} />}
+                        <span style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                          {spot.address || `${t('footer.address').split(',')[0]}, Canarias`}
+                        </span>
+                      </div>
+                      {spot.category !== 'regulations' && (
+                        <a 
+                          href={spot.geoCoordinates 
+                            ? `https://www.google.com/maps/search/?api=1&query=${spot.geoCoordinates.lat},${spot.geoCoordinates.lng}`
+                            : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name + ', Fuerteventura')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-primary"
+                          onClick={(e) => e.stopPropagation()}
+                          style={{
+                            padding: '0.35rem 0.65rem',
+                            fontSize: '0.7rem',
+                            borderRadius: '6px',
+                            gap: '0.25rem',
+                            margin: 0,
+                            boxShadow: 'none',
+                            minHeight: 'auto',
+                            lineHeight: '1',
+                            display: 'inline-flex',
+                            alignItems: 'center'
+                          }}
+                        >
+                          <MapPin size={10} />
+                          {t('map.btn_directions')}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -750,7 +815,7 @@ export default function AdventureMap() {
           {/* Tarjeta de Información Estática Abajo (nunca obstruye los puntos del mapa) */}
           {activeSpot && (
             <div 
-              className="spot-info-card glass animate-fade-in" 
+              className="spot-info-card desktop-only-info-card glass animate-fade-in" 
               style={{ 
                 background: 'rgba(22, 24, 31, 0.96)', 
                 border: '1px solid var(--border-color)',
