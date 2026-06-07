@@ -612,7 +612,6 @@ export default function AdventureMap() {
           .spots-list {
             width: 100% !important;
             max-width: 100% !important;
-            overflow: hidden !important;
             box-sizing: border-box !important;
           }
           .spot-item {
@@ -620,7 +619,6 @@ export default function AdventureMap() {
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
-            overflow: hidden !important;
           }
           .spot-item-expanded-inline {
             display: flex !important;
@@ -632,7 +630,6 @@ export default function AdventureMap() {
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
-            overflow: hidden !important;
           }
           .spot-item-expanded-inline p {
             word-break: break-word !important;
@@ -755,7 +752,8 @@ export default function AdventureMap() {
                       background: 'var(--bg-tertiary)', 
                       marginBottom: '0.5rem',
                       display: 'block',
-                      maxWidth: '100%'
+                      maxWidth: '100%',
+                      flexShrink: 0
                     }}>
                       <img 
                         src={import.meta.env.BASE_URL + spot.image} 
