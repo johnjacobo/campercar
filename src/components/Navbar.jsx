@@ -100,7 +100,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
           .navbar.scrolled {
             height: 60px !important;
           }
-          .navbar.scrolled img {
+          .navbar.scrolled .logo-container img {
             height: 46px !important;
           }
         }
