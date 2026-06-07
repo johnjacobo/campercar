@@ -1,8 +1,127 @@
 import React, { useState } from 'react';
-import { Compass, MapPin, Sparkles, Droplet } from 'lucide-react';
+import { Compass, MapPin, Sparkles, Droplet, Shield } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const spots = [
+  // Normativas y Cuidados
+  {
+    id: 'pernocta',
+    category: 'regulations',
+    name: 'Pernoctar vs Acampar',
+    image: 'images/camper_beach.png',
+    type: {
+      es: 'Normativa General de Pernocta',
+      en: 'General Overnight Rules',
+      de: 'Allgemeine Übernachtungsregeln',
+      fr: 'Règles Générales de Bivouac',
+      it: 'Regole Generali di Pernottamento'
+    },
+    coordinates: { x: 250, y: 190 },
+    description: {
+      es: 'Está permitido pernoctar (dormir dentro de la camper correctamente estacionada). Según la Ordenanza del Cabildo, la libre acampada (desplegar toldos, mesas, sillas o verter líquidos) está estrictamente prohibida en suelo rústico y espacios públicos.',
+      en: 'Overnight stay is permitted (sleeping inside a correctly parked camper). Under the Cabildo\'s Ordinance, free camping (deploying awnings, tables, chairs, or dumping liquids) is strictly prohibited on rustic land and public spaces.',
+      de: 'Übernachten ist erlaubt (Schlafen im ordnungsgemäß geparkten Camper). Gemäß der Verordnung des Cabildos ist das freie Campen (Ausrollen von Markisen, Tischen, Stühlen oder Ablassen von Flüssigkeiten) auf rustikalem Land und im öffentlichen Raum streng verboten.',
+      fr: 'Bivouac autorisé (dormir à l\'intérieur du van correctement stationné). Selon l\'ordonnance du Cabildo, le camping sauvage (déployer des auvents, tables, chaises ou vider des liquides) est strictement interdit sur les terrains rustiques et espaces publics.',
+      it: 'Pernottamento consentito (dormire all\'interno del camper correttamente parcheggiato). Secondo l\'ordinanza del Cabildo, il campeggio libero (apertura di tendalini, tavoli, sedie o scarico di liquidi) è severamente vietato su terreni rustici e spazi pubblici.'
+    },
+    activity: {
+      es: 'Pernocta Legal, DGT',
+      en: 'Legal Overnight, DGT',
+      de: 'Legales Übernachten, DGT',
+      fr: 'Bivouac Légal, DGT',
+      it: 'Pernottamento Legale, DGT'
+    },
+    address: 'Ordenanza Cabildo de Fuerteventura (DGT 08/V-74)'
+  },
+  {
+    id: 'zonas-protegidas',
+    category: 'regulations',
+    name: 'Espacios Naturales',
+    image: 'images/camper_volcano.png',
+    type: {
+      es: 'Protección de Parques Naturales',
+      en: 'Protected Natural Parks',
+      de: 'Geschützte Naturparks',
+      fr: 'Parcs Naturels Protégés',
+      it: 'Parchi Naturali Protetti'
+    },
+    coordinates: { x: 310, y: 120 },
+    description: {
+      es: 'Fuerteventura es Reserva de la Biosfera. La ordenanza insular prohíbe acampar o estacionar fuera de pistas autorizadas en espacios protegidos y Red Natura 2000 (como Corralejo, Cofete y Jandía). Multas severas por infracción ecológica.',
+      en: 'Fuerteventura is a Biosphere Reserve. The insular ordinance prohibits camping or parking off-road in protected areas and Natura 2000 sites (such as Corralejo, Cofete, and Jandía). Strict fines apply for ecological violations.',
+      de: 'Fuerteventura ist ein Biosphärenreservat. Die Inselverordnung verbietet das Campen oder Parken abseits der Straßen in Schutzgebieten und Natura-2000-Gebieten (wie Corralejo, Cofete und Jandía). Hohe Geldstrafen bei Umweltverstößen.',
+      fr: 'Fuerteventura est une réserve de biosphère. L\'ordonnance insulaire interdit le camping et le stationnement hors-piste dans les espaces protégés et sites Natura 2000 (comme Corralejo, Cofete et Jandía). Amendes sévères pour infraction écologique.',
+      it: 'Fuerteventura è una Riserva della Biosfera. L\'ordinanza insulare vieta il campeggio e il parcheggio fuoristrada nelle aree protette e nei siti Natura 2000 (come Corralejo, Cofete e Jandía). Multe severe per violazioni ecologiche.'
+    },
+    activity: {
+      es: 'Parques Naturales, Multas',
+      en: 'Natural Parks, Fines',
+      de: 'Naturparks, Bußgelder',
+      fr: 'Parcs Naturels, Amendes',
+      it: 'Parchi Naturali, Multe'
+    },
+    address: 'Espacios Protegidos y Red Natura 2000'
+  },
+  {
+    id: 'gestion-residuos',
+    category: 'regulations',
+    name: 'Vertido Cero y Aguas',
+    image: 'images/camper_service.png',
+    type: {
+      es: 'Cuidado Ambiental Ecológico',
+      en: 'Eco-Friendly Environmental Care',
+      de: 'Umweltschonende Entsorgung',
+      fr: 'Respect de l\'Environnement',
+      it: 'Rispetto dell\'Ambiente Ecologico'
+    },
+    coordinates: { x: 230, y: 280 },
+    description: {
+      es: 'Está prohibido verter aguas grises/negras en el suelo, barrancos o playas. La ordenanza insular del Cabildo exige realizar el vaciado exclusivamente en áreas de servicios de acogida autorizadas (Puntos Limpios) para proteger el frágil ecosistema.',
+      en: 'Dumping gray/black water on the ground, ravines, or beaches is prohibited. The Cabildo\'s insular ordinance requires emptying exclusively at authorized reception service areas (Clean Points) to protect the fragile ecosystem.',
+      de: 'Das Ablassen von Grau-/Schwarzwasser auf dem Boden, in Schluchten oder an Stränden ist verboten. Die Verordnung des Cabildos verlangt die Entleerung ausschließlich an zugelassenen Servicestellen (Puntos Limpios) zum Schutz des empfindlichen Ökosystems.',
+      fr: 'Il est interdit de vider les eaux grises/noires sur le sol, les ravins ou les plages. L\'ordonnance insulaire du Cabildo exige la vidange exclusivement dans les aires de services agréées (Points Propres) pour protéger l\'écosystème fragile.',
+      it: 'È vietato scaricare acque grigie/nere sul terreno, nei calanchi o sulle spiagge. L\'ordinanza insulare del Cabildo impone lo scarico esclusivamente nelle aree di servizio autorizzate (Punti di Scarico) per proteggere il fragile ecosistema.'
+    },
+    activity: {
+      es: 'Vaciado, Ecología',
+      en: 'Disposal, Ecology',
+      de: 'Entsorgung, Ökologie',
+      fr: 'Vidange, Écologie',
+      it: 'Scarico, Ecologia'
+    },
+    address: 'Red de Puntos Limpios del Cabildo'
+  },
+  {
+    id: 'respeto-comunidad',
+    category: 'regulations',
+    name: 'Respeto al Entorno Local',
+    image: 'images/epic_beach.png',
+    type: {
+      es: 'Convivencia y Limpieza',
+      en: 'Coexistence & Tidiness',
+      de: 'Zusammenleben & Sauberkeit',
+      fr: 'Cohabitation & Propreté',
+      it: 'Convivenza & Pulizia'
+    },
+    coordinates: { x: 270, y: 350 },
+    description: {
+      es: 'Evita aglomeraciones de campers en playas urbanas. Respeta el descanso de los residentes locales, mantén bajos los niveles de ruido y llévate toda la basura contigo. Fuerteventura es un paraíso que protegemos entre todos.',
+      en: 'Avoid crowding campers on urban beaches. Respect the rest of local residents, keep noise levels low, and take all your trash with you. Fuerteventura is a paradise we protect together.',
+      de: 'Vermeiden Sie Camper-Ansammlungen an Stadtstränden. Respektieren Sie die Ruhe der Anwohner, halten Sie den Lärmpegel niedrig und nehmen Sie Ihren Müll mit. Fuerteventura is ein Paradies, das wir gemeinsam schützen.',
+      fr: 'Évitez les rassemblements de campers sur les plages urbaines. Respectez le repos des habitants locaux, gardez le bruit bas et emportez tous vos déchets. Fuerteventura est un paradis que nous protégeons ensemble.',
+      it: 'Evita l\'affollamento di camper sulle spiagge urbane. Rispetta il riposo dei residenti locali, mantieni bassi i livelli di rumore e porta via tutti i rifiuti. Fuerteventura è un paradiso che proteggiamo insieme.'
+    },
+    activity: {
+      es: 'Comunidad, Basura Cero',
+      en: 'Community, Zero Waste',
+      de: 'Gemeinschaft, Müllfrei',
+      fr: 'Communauté, Zéro Déchet',
+      it: 'Comunità, Rifiuti Zero'
+    },
+    address: 'Buenas Prácticas Camper'
+  },
+
+  // Spots de Aventura
   {
     id: 'corralejo',
     category: 'adventure',
@@ -106,9 +225,9 @@ const spots = [
     description: {
       es: 'La joya salvaje de la isla. 12 km de playa virgen custodiada por montañas de más de 800m. Acceso por pista de tierra de aventura. Pernoctar aquí en camper es una experiencia mística.',
       en: 'The wild jewel of the island. 12 km of pristine beach guarded by mountains over 800m. Access by dirt track adventure. Spending the night here in a camper is a mystical experience.',
-      de: 'Das wilde Juwel der Insel. 12 km unberührter Strand, bewacht von über 800 m hohen Bergen. Zufahrt über eine abenteuerliche Schotterpiste. Die Nacht hier im Camper zu verbringen, ist eine mystische Erfahrung.',
+      de: 'Das wilde Juwel der Insel. 12 km unberührter Strand, bewacht von über 800 m hohen Bergen. Zufahrt über eine abenteuerliche Schotterpiste. Die Nacht hier im Camper zu verbringen, es una experiencia mística.',
       fr: "Le joyau sauvage de l'île. 12 km de plage vierge gardée par des montagnes de plus de 800m. Accès par piste de terre d'aventure. Passer la nuit ici en camper est une expérience mystique.",
-      it: "Il gioiello selvaggio dell'isola. 12 km di spiaggia incontaminata custodita da montagne di oltre 800m. Accesso da pista sterrata d'avventura. Pernottare qui in camper es un'esperienza mistica."
+      it: "Il gioiello selvaggio dell'isola. 12 km di spiaggia incontaminata custodita da montagne di oltre 800m. Accesso da pista sterrata d'avventura. Pernottare qui in camper è un'esperienza mistica."
     },
     activity: {
       es: '4x4, Meditación, Aislamiento',
@@ -137,7 +256,7 @@ const spots = [
       en: 'A huge sand barrier creates a 4km long natural tidal lagoon. The world epicenter of Windsurfing and ideal for resting while feeling the breeze.',
       de: 'Eine riesige Sandbarriere bildet eine 4 km lange natürliche Gezeitenlagune. Das weltweite Epizentrum des Windsurfens und ideal zum Ausruhen, während man die Brise spürt.',
       fr: "Une immense barrière de sable crée une lagune de marée naturelle de 4 km de long. L'épicentre mondial de la planche à voile et idéal pour se reposer en sentant la brise.",
-      it: "Una enorme barriera di sabbia crea una laguna di marea naturale lunga 4 km. L'epicentro mondiale del Windsurf e ideale per riposare sentendo la brezza."
+      it: "Una enorme barriera di sabbia crea una laguna di marea naturale lunga 4 km. L'epicentro mundial de Windsurf e ideale per riposare sentendo la brezza."
     },
     activity: {
       es: 'Windsurf, Yoga, Relax',
@@ -148,6 +267,7 @@ const spots = [
     },
     difficulty: 'diff_easy'
   },
+
   // Puntos Limpios / Servicios
   {
     id: 'disa-mercasosa',
@@ -169,7 +289,7 @@ const spots = [
       en: 'Service station well known by motorhome owners in Puerto del Rosario. Equipped with a grate for gray water drainage and an area for black water disposal. Please ask the staff before using the services.',
       de: 'Tankstelle, die unter Wohnmobilisten in Puerto del Rosario sehr bekannt ist. Sie verfügt über ein Gitter zur Entsorgung von Grauwasser und eine Vorrichtung zur Entsorgung von Schwarzwasser. Bitte fragen Sie das Personal vor der Nutzung.',
       fr: 'Station-service bien connue des camping-caristes à Puerto del Rosario. Équipée d\'une grille pour l\'évacuation des eaux grises et d\'un point pour les eaux noires. Veuillez demander au personnel avant l\'utilisation.',
-      it: 'Stazione di servicio molto conosciuta dai camperisti a Puerto del Rosario. Dispone di una griglia per lo scarico delle acque grigie e di un punto habilitato per lo scarico delle acque nere. Chiedere al personale prima dell\'uso.'
+      it: 'Stazione di servicio molto conosciuta dai camperisti a Puerto del Rosario. Dispone di una griglia per lo scarico delle acque grigie e de un punto habilitato per lo scarico delle acque nere. Chiedere al personale prima dell\'uso.'
     },
     activity: {
       es: 'Aguas Grises, Aguas Negras, Gasolinera',
@@ -332,7 +452,7 @@ const spots = [
 ];
 
 export default function AdventureMap() {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('regulations');
   const { language, t } = useLanguage();
 
   const filteredSpots = spots.filter(spot => {
@@ -379,27 +499,40 @@ export default function AdventureMap() {
           
           {/* Pestañas de Categoría */}
           <div className="flex" style={{ gap: '0.35rem', marginBottom: '1.25rem', padding: '0 0.5rem', flexWrap: 'wrap' }}>
-            {['all', 'adventure', 'service'].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => handleCategoryChange(cat)}
-                className="glass"
-                style={{
-                  padding: '0.45rem 0.8rem',
-                  borderRadius: '8px',
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                  background: activeCategory === cat ? 'var(--accent-orange)' : 'rgba(255, 255, 255, 0.05)',
-                  color: activeCategory === cat ? 'white' : 'var(--text-secondary)',
-                  border: activeCategory === cat ? '1px solid var(--accent-orange)' : '1px solid var(--border-color)',
-                  transition: 'all var(--transition-fast)',
-                  outline: 'none'
-                }}
-              >
-                {t(`map.tab_${cat === 'service' ? 'services' : cat}`)}
-              </button>
-            ))}
+            {['regulations', 'adventure', 'service'].map((cat) => {
+              const Icon = cat === 'regulations' ? Shield : (cat === 'service' ? Droplet : Compass);
+              return (
+                <button
+                  key={cat}
+                  onClick={() => handleCategoryChange(cat)}
+                  className="glass"
+                  style={{
+                    padding: '0.45rem 0.8rem',
+                    borderRadius: '8px',
+                    fontSize: '0.75rem',
+                    fontWeight: '700',
+                    cursor: 'pointer',
+                    background: activeCategory === cat ? 'var(--accent-orange)' : 'rgba(255, 255, 255, 0.05)',
+                    color: activeCategory === cat ? 'white' : 'var(--text-secondary)',
+                    border: activeCategory === cat ? '1px solid var(--accent-orange)' : '1px solid var(--border-color)',
+                    transition: 'all var(--transition-fast)',
+                    outline: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.35rem'
+                  }}
+                >
+                  <Icon size={14} style={{ 
+                    color: activeCategory === cat 
+                      ? 'white' 
+                      : (cat === 'regulations' 
+                          ? 'var(--accent-gold)' 
+                          : (cat === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'))
+                  }} />
+                  {t(`map.tab_${cat === 'service' ? 'services' : cat}`)}
+                </button>
+              );
+            })}
           </div>
 
           {/* Lista Filtrada */}
@@ -411,7 +544,11 @@ export default function AdventureMap() {
                 onClick={() => setActiveSpot(spot)}
                 style={{
                   borderLeft: activeSpot.id === spot.id 
-                    ? `4px solid ${spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'}` 
+                    ? `4px solid ${
+                        spot.category === 'regulations' 
+                          ? 'var(--accent-gold)' 
+                          : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)')
+                      }` 
                     : '1px solid var(--border-color)'
                 }}
               >
@@ -420,7 +557,9 @@ export default function AdventureMap() {
                   <span 
                     className="spot-tag"
                     style={{
-                      color: spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-gold)'
+                      color: spot.category === 'regulations' 
+                        ? 'var(--accent-gold)' 
+                        : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)')
                     }}
                   >
                     {getLocalized(spot.activity).split(',')[0]}
@@ -479,7 +618,9 @@ export default function AdventureMap() {
                     style={{ 
                       fill: activeSpot.id === spot.id 
                       ? 'var(--accent-gold)' 
-                      : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'),
+                      : (spot.category === 'regulations' 
+                          ? 'var(--accent-gold)' 
+                          : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)')),
                       stroke: 'white',
                       strokeWidth: 2,
                       transition: 'all var(--transition-fast)'
@@ -488,7 +629,11 @@ export default function AdventureMap() {
                   <circle 
                     r="13" 
                     fill="none" 
-                    stroke={spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'} 
+                    stroke={
+                      spot.category === 'regulations' 
+                        ? 'var(--accent-gold)' 
+                        : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)')
+                    } 
                     strokeWidth="1.5" 
                     style={{ 
                       opacity: activeSpot.id === spot.id ? 1 : 0,
@@ -546,6 +691,13 @@ export default function AdventureMap() {
                           {t('map.tab_services')}
                         </span>
                       </>
+                    ) : activeSpot.category === 'regulations' ? (
+                      <>
+                        <Shield size={14} style={{ color: 'var(--accent-gold)' }} />
+                        <span className="badge badge-gold" style={{ fontSize: '0.72rem', background: 'rgba(230, 194, 128, 0.15)', color: 'var(--accent-gold)', border: '1px solid rgba(230, 194, 128, 0.3)' }}>
+                          {t('map.tab_regulations')}
+                        </span>
+                      </>
                     ) : (
                       <>
                         <Compass size={14} className="animate-spin-slow" style={{ color: 'var(--accent-orange)' }} />
@@ -568,13 +720,17 @@ export default function AdventureMap() {
                   </p>
                 </div>
                 
-                {/* Fila inferior: Dirección y Botón de Google Maps */}
+                {/* Fila inferior: Dirección/Normativa y Botón de Google Maps */}
                 <div className="flex align-center justify-between" style={{ marginTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.65rem', gap: '1rem', flexWrap: 'wrap' }}>
                   <div className="flex align-center" style={{ gap: '0.35rem', fontSize: '0.8rem', color: 'var(--accent-gold)' }}>
-                    <MapPin size={13} style={{ flexShrink: 0 }} />
+                    {activeSpot.category === 'regulations' ? (
+                      <Shield size={13} style={{ flexShrink: 0 }} />
+                    ) : (
+                      <MapPin size={13} style={{ flexShrink: 0 }} />
+                    )}
                     <span 
                       style={{ 
-                        maxWidth: '180px', 
+                        maxWidth: '220px', 
                         overflow: 'hidden', 
                         textOverflow: 'ellipsis', 
                         whiteSpace: 'nowrap',
@@ -586,25 +742,27 @@ export default function AdventureMap() {
                     </span>
                   </div>
                   
-                  <a 
-                    href={mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary"
-                    style={{
-                      padding: '0.45rem 0.85rem',
-                      fontSize: '0.75rem',
-                      borderRadius: '8px',
-                      gap: '0.4rem',
-                      margin: 0,
-                      boxShadow: 'none',
-                      minHeight: 'auto',
-                      lineHeight: '1'
-                    }}
-                  >
-                    <MapPin size={11} />
-                    {t('map.btn_directions')}
-                  </a>
+                  {activeSpot.category !== 'regulations' && (
+                    <a 
+                      href={mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary"
+                      style={{
+                        padding: '0.45rem 0.85rem',
+                        fontSize: '0.75rem',
+                        borderRadius: '8px',
+                        gap: '0.4rem',
+                        margin: 0,
+                        boxShadow: 'none',
+                        minHeight: 'auto',
+                        lineHeight: '1'
+                      }}
+                    >
+                      <MapPin size={11} />
+                      {t('map.btn_directions')}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

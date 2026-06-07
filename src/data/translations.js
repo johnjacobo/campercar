@@ -153,7 +153,7 @@ export const translations = {
       diff_hard: "Difícil (Pista de tierra)",
       activity_tag: "Actividad",
       spots_list_title: "Puntos Destacados",
-      tab_all: "Todos",
+      tab_regulations: "Normativas y Cuidados",
       tab_adventure: "Aventura y Naturaleza",
       tab_services: "Puntos Limpios",
       btn_directions: "Abrir en Google Maps"
@@ -324,7 +324,7 @@ export const translations = {
       diff_hard: "Difficult (Dirt track)",
       activity_tag: "Activity",
       spots_list_title: "Highlighted Spots",
-      tab_all: "All",
+      tab_regulations: "Rules & Safety",
       tab_adventure: "Adventure & Nature",
       tab_services: "Camper Waste Stations",
       btn_directions: "Open in Google Maps"
@@ -495,7 +495,7 @@ export const translations = {
       diff_hard: "Schwer (Schotterpiste)",
       activity_tag: "Aktivität",
       spots_list_title: "Highlights",
-      tab_all: "Alle",
+      tab_regulations: "Regeln & Sicherheit",
       tab_adventure: "Abenteuer & Natur",
       tab_services: "Entsorgungsstellen",
       btn_directions: "In Google Maps öffnen"
@@ -666,7 +666,7 @@ export const translations = {
       diff_hard: "Difficile (Piste de terre)",
       activity_tag: "Activité",
       spots_list_title: "Points Clés",
-      tab_all: "Tous",
+      tab_regulations: "Règles & Sécurité",
       tab_adventure: "Aventure & Nature",
       tab_services: "Points Propres",
       btn_directions: "Ouvrir sur Google Maps"
@@ -837,7 +837,7 @@ export const translations = {
       diff_hard: "Difficile (Strada sterrata)",
       activity_tag: "Attività",
       spots_list_title: "Punti in Evidenza",
-      tab_all: "Tutti",
+      tab_regulations: "Regole & Sicurezza",
       tab_adventure: "Avventura & Natura",
       tab_services: "Punti di Scarico",
       btn_directions: "Apri in Google Maps"
