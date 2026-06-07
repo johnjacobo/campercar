@@ -107,8 +107,8 @@ const spots = [
       es: 'La joya salvaje de la isla. 12 km de playa virgen custodiada por montañas de más de 800m. Acceso por pista de tierra de aventura. Pernoctar aquí en camper es una experiencia mística.',
       en: 'The wild jewel of the island. 12 km of pristine beach guarded by mountains over 800m. Access by dirt track adventure. Spending the night here in a camper is a mystical experience.',
       de: 'Das wilde Juwel der Insel. 12 km unberührter Strand, bewacht von über 800 m hohen Bergen. Zufahrt über eine abenteuerliche Schotterpiste. Die Nacht hier im Camper zu verbringen, ist eine mystische Erfahrung.',
-      fr: "Le joyau sauvage de l'île. 12 km de plage vierge gardée par des montagnes de plus de 800m. Accès par piste de terre d'aventure. Passer la nuit ici en camper es une expérience mystique.",
-      it: "Il gioiello selvaggio dell'isola. 12 km di spiaggia incontaminata custodita da montagne di oltre 800m. Accesso da pista sterrata d'avventura. Pernottare qui in camper è un'esperienza mistica."
+      fr: "Le joyau sauvage de l'île. 12 km de plage vierge gardée par des montagnes de plus de 800m. Accès par piste de terre d'aventure. Passer la nuit ici en camper est une expérience mystique.",
+      it: "Il gioiello selvaggio dell'isola. 12 km di spiaggia incontaminata custodita da montagne di oltre 800m. Accesso da pista sterrata d'avventura. Pernottare qui in camper es un'esperienza mistica."
     },
     activity: {
       es: '4x4, Meditación, Aislamiento',
@@ -169,7 +169,7 @@ const spots = [
       en: 'Service station well known by motorhome owners in Puerto del Rosario. Equipped with a grate for gray water drainage and an area for black water disposal. Please ask the staff before using the services.',
       de: 'Tankstelle, die unter Wohnmobilisten in Puerto del Rosario sehr bekannt ist. Sie verfügt über ein Gitter zur Entsorgung von Grauwasser und eine Vorrichtung zur Entsorgung von Schwarzwasser. Bitte fragen Sie das Personal vor der Nutzung.',
       fr: 'Station-service bien connue des camping-caristes à Puerto del Rosario. Équipée d\'une grille pour l\'évacuation des eaux grises et d\'un point pour les eaux noires. Veuillez demander au personnel avant l\'utilisation.',
-      it: 'Stazione di servizio molto conosciuta dai camperisti a Puerto del Rosario. Dispone di una griglia per lo scarico delle acque grigie e di un punto abilitato per lo scarico delle acque nere. Chiedere al personale prima dell\'uso.'
+      it: 'Stazione di servicio molto conosciuta dai camperisti a Puerto del Rosario. Dispone di una griglia per lo scarico delle acque grigie e di un punto habilitato per lo scarico delle acque nere. Chiedere al personale prima dell\'uso.'
     },
     activity: {
       es: 'Aguas Grises, Aguas Negras, Gasolinera',
@@ -229,7 +229,7 @@ const spots = [
       en: 'Service point located at the entrance of the picturesque village of El Cotillo. Offers wastewater disposal and fresh drinking water refill (with a minimal maintenance fee).',
       de: 'Servicestelle am Eingang des malerischen Dorfes El Cotillo. Bietet Abwasserentsorgung und Trinkwasserauffüllung (mit einer geringen Wartungsgebühr).',
       fr: 'Point de services situé à l\'entrée du pittoresque village d\'El Cotillo. Propose la vidange des eaux usées et le remplissage d\'eau potable (avec un coût d\'entretien minime).',
-      it: 'Punto di servizio situato all\'ingresso del pittoresco villaggio di El Cotillo. Offre lo scarico delle acque reflue e il carico di acqua potabile pulita (con costo minimo di manutenzione).'
+      it: 'Punto di servizio situato all\'ingresso del pittoresco villaggio di El Cotillo. Offre lo scarico delle acque reflue e il carico di agua potabile pulita (con costo minimo di manutenzione).'
     },
     activity: {
       es: 'Vaciado, Agua Potable, El Cotillo',
@@ -318,7 +318,7 @@ const spots = [
       es: 'Ubicada en el núcleo turístico de Corralejo. Dispone de servicios para el vaciado de aguas grises y negras de forma gratuita. El llenado de agua limpia se realiza mediante fichas de pago.',
       en: 'Located in the tourist hub of Corralejo. Features free gray and black water disposal services. Fresh water refill is available using paid tokens.',
       de: 'Liegt im Tourismuszentrum von Corralejo. Bietet kostenlose Grauwasser- und Schwarzwasserentsorgung. Frischwasserbefüllung ist gegen Wertmarken möglich.',
-      fr: 'Située dans le centre touristique de Corralejo. Propose des services de vidange d\'eaux grises et noires gratuits. Remplissage d\'eau propre disponible via jetons payants.',
+      fr: 'Située dans le centre touristique de Corralejo. Propose des services de vidange d\'eaux grises et noires gratuits. Remplissage d\'agua propre disponible via jetons payants.',
       it: 'Situata nel centro turistico di Corralejo. Dispone di servizi per lo scarico di acque grigie e nere gratuiti. Il rifornimento di agua pulita è a pagamento tramite gettoni.'
     },
     activity: {
@@ -397,7 +397,7 @@ export default function AdventureMap() {
                   outline: 'none'
                 }}
               >
-                {t(`map.tab_${cat}`)}
+                {t(`map.tab_${cat === 'service' ? 'services' : cat}`)}
               </button>
             ))}
           </div>
@@ -434,83 +434,86 @@ export default function AdventureMap() {
           </div>
         </div>
 
-        {/* Contenedor del Mapa SVG */}
-        <div className="map-container glass">
-          <svg viewBox="0 0 500 500" className="map-svg">
-            {/* Cuadrícula estética de fondo */}
-            <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.015)" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-            
-            {/* Silueta vectorial de Fuerteventura */}
-            <path
-              className="island-path"
-              d="M 230 100 
-                 C 270 80, 310 70, 360 80 
-                 C 380 90, 390 110, 370 130
-                 C 340 160, 300 200, 290 230
-                 C 280 250, 290 280, 270 310
-                 C 250 330, 220 340, 200 360
-                 C 180 370, 190 395, 170 410
-                 C 140 430, 100 440, 70 430
-                 C 50 420, 60 395, 90 380
-                 C 110 370, 130 360, 150 350
-                 C 180 330, 185 300, 190 280
-                 C 200 250, 210 200, 205 170
-                 C 200 140, 215 115, 230 100 Z"
-            />
+        {/* Lado derecho: Mapa y popup apilados verticalmente (evita superposición y cortes) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%' }}>
+          {/* Contenedor del Mapa SVG (Proporción horizontal) */}
+          <div className="map-container glass" style={{ height: '360px', position: 'relative', overflow: 'hidden' }}>
+            <svg viewBox="0 0 500 500" className="map-svg" style={{ width: '100%', height: '100%', display: 'block' }}>
+              {/* Cuadrícula estética de fondo */}
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.015)" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+              
+              {/* Silueta vectorial de Fuerteventura */}
+              <path
+                className="island-path"
+                d="M 230 100 
+                   C 270 80, 310 70, 360 80 
+                   C 380 90, 390 110, 370 130
+                   C 340 160, 300 200, 290 230
+                   C 280 250, 290 280, 270 310
+                   C 250 330, 220 340, 200 360
+                   C 180 370, 190 395, 170 410
+                   C 140 430, 100 440, 70 430
+                   C 50 420, 60 395, 90 380
+                   C 110 370, 130 360, 150 350
+                   C 180 330, 185 300, 190 280
+                   C 200 250, 210 200, 205 170
+                   C 200 140, 215 115, 230 100 Z"
+              />
 
-            {/* Marcadores Interactivos */}
-            {filteredSpots.map((spot) => (
-              <g
-                key={spot.id}
-                className={`map-marker ${activeSpot.id === spot.id ? 'active' : ''}`}
-                transform={`translate(${spot.coordinates.x}, ${spot.coordinates.y})`}
-                onClick={() => setActiveSpot(spot)}
-              >
-                {/* Círculos dinámicos con color según categoría */}
-                <circle 
-                  r={activeSpot.id === spot.id ? 9 : 6.5} 
-                  style={{ 
-                    fill: activeSpot.id === spot.id 
-                    ? 'var(--accent-gold)' 
-                    : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'),
-                    stroke: 'white',
-                    strokeWidth: 2,
-                    transition: 'all var(--transition-fast)'
-                  }} 
-                />
-                <circle 
-                  r="13" 
-                  fill="none" 
-                  stroke={spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'} 
-                  strokeWidth="1.5" 
-                  style={{ 
-                    opacity: activeSpot.id === spot.id ? 1 : 0,
-                    transition: 'all var(--transition-fast)'
-                  }} 
-                />
-                <text y="-18" style={{ fontSize: '10px', fill: 'white', fontWeight: '700' }}>
-                  {spot.name.split(' ')[0]}
-                </text>
-              </g>
-            ))}
-          </svg>
+              {/* Marcadores Interactivos */}
+              {filteredSpots.map((spot) => (
+                <g
+                  key={spot.id}
+                  className={`map-marker ${activeSpot.id === spot.id ? 'active' : ''}`}
+                  transform={`translate(${spot.coordinates.x}, ${spot.coordinates.y})`}
+                  onClick={() => setActiveSpot(spot)}
+                >
+                  {/* Círculos dinámicos con color según categoría */}
+                  <circle 
+                    r={activeSpot.id === spot.id ? 9 : 6.5} 
+                    style={{ 
+                      fill: activeSpot.id === spot.id 
+                      ? 'var(--accent-gold)' 
+                      : (spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'),
+                      stroke: 'white',
+                      strokeWidth: 2,
+                      transition: 'all var(--transition-fast)'
+                    }} 
+                  />
+                  <circle 
+                    r="13" 
+                    fill="none" 
+                    stroke={spot.category === 'service' ? 'var(--accent-teal)' : 'var(--accent-orange)'} 
+                    strokeWidth="1.5" 
+                    style={{ 
+                      opacity: activeSpot.id === spot.id ? 1 : 0,
+                      transition: 'all var(--transition-fast)'
+                    }} 
+                  />
+                  <text y="-18" style={{ fontSize: '10px', fill: 'white', fontWeight: '700' }}>
+                    {spot.name.split(' ')[0]}
+                  </text>
+                </g>
+              ))}
+            </svg>
+          </div>
 
-          {/* Ventana flotante de Información del punto activo */}
+          {/* Tarjeta de Información Estática Abajo (nunca obstruye los puntos del mapa) */}
           {activeSpot && (
             <div 
-              className="map-info-popup glass animate-fade-in" 
+              className="glass animate-fade-in" 
               style={{ 
                 background: 'rgba(22, 24, 31, 0.96)', 
                 border: '1px solid var(--border-color)',
                 display: 'flex',
                 gap: '1.25rem',
                 padding: '1.25rem',
-                zIndex: 10
+                borderRadius: 'var(--radius-md)'
               }}
             >
               {/* Imagen en Desktop */}
