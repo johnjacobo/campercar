@@ -58,9 +58,36 @@ export default function Navbar({ activeTab, setActiveTab }) {
           background: rgba(255, 255, 255, 0.15) !important;
           transform: translateY(-1px);
         }
+        .nav-drawer {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          left: auto;
+          width: 300px;
+          display: flex;
+          flex-direction: column;
+          padding: 1.5rem;
+          gap: 1rem;
+          background: #13141a !important;
+          border-left: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--border-color);
+          border-bottom-left-radius: 12px;
+          box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
+          z-index: 999;
+          animation: scaleIn 0.15s ease-out;
+          transform-origin: top right;
+        }
         @media (max-width: 768px) {
           .desktop-only-btn {
             display: none !important;
+          }
+          .nav-drawer {
+            left: 0;
+            width: 100%;
+            border-left: none;
+            border-bottom-left-radius: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform-origin: top center;
           }
         }
         @media (max-width: 576px) {
@@ -225,20 +252,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
 
         {/* Mobile Drawer */}
         {isMobileMenuOpen && (
-          <div className="glass" style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '1.5rem',
-            gap: '1rem',
-            background: '#13141a',
-            borderBottom: '1px solid var(--border-color)',
-            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
-            zIndex: 999
-          }}>
+          <div className="glass nav-drawer">
             {navItems.map((item) => (
               <a
                 key={item.id}
