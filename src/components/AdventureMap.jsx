@@ -363,10 +363,10 @@ const spots = [
 
   // Puntos Limpios / Servicios
   {
-    id: 'disa-mercasosa',
+    id: 'disa-mercadona',
     category: 'service',
-    name: 'DISA Nueva Mercasosa',
-    image: 'images/service_disa_mercasosa.png',
+    name: 'DISA Nueva Mercadona',
+    image: 'images/service_disa_mercadona.png',
     type: {
       es: 'Estación de Servicio y Vaciado',
       en: 'Service & Disposal Station',
